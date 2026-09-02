@@ -1,0 +1,40 @@
+{
+  "summary": "Backend + Frontend testing for KKN-PLP Group 66. Ran 24 pytest tests (23 passed, 1 failed). Verified public site (hero, 15 team members, 6 programs, 7 timeline, empty gallery/videos states) and full admin flow (login, dashboard stats, Team CRUD via UI with search + confirm-delete toast, Settings save, logout redirect). Found one production bug: /api/upload returns an internal cluster URL (http://...cluster-5.preview.emergentcf.cloud) via request.base_url which is NOT publicly accessible (returns 403); only the storageKey served via REACT_APP_BACKEND_URL is reachable.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "POST /api/upload",
+        "issue": "Response 'url' field is constructed from request.base_url which resolves to the internal cluster hostname (http://kkn-integrated.cluster-5.preview.emergentcf.cloud/api/files/...) and returns 403 Forbidden when fetched externally. Frontend/browser cannot render uploaded images via this URL. Only /api/files/{storageKey} on REACT_APP_BACKEND_URL works. Fix: build the returned URL using an env var (e.g. PUBLIC_BASE_URL / REACT_APP_BACKEND_URL) or return only storageKey and let the frontend prefix REACT_APP_BACKEND_URL.",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Fix /api/upload to return a publicly reachable URL (use REACT_APP_BACKEND_URL / PUBLIC_BASE_URL env var instead of request.base_url) so uploaded images render in the browser."
+  ],
+  "critical_code_review_comments": [
+    "server.py L162-163: request.base_url on this platform resolves to the internal cluster URL and breaks the returned image URL. Prefer an explicit env var or return only storageKey.",
+    "seed() in server.py always rehashes the admin password on startup when it doesn't match the hash - minor but works. Consider skipping when password already valid to reduce startup cost.",
+    "settings admin UI does not use the documented `field-{name}` data-testid pattern (uses standard labels/inputs) - not blocking but inconsistent with ResourceManager convention."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py (new)"
+  ],
+  "success_rate": {"backend": "96% (23/24)", "frontend": "100%"},
+  "test_credentials": "Admin: kknplpdesabanjarejo@gmail.com / KknPlp66!Admin (from /app/memory/test_credentials.md)",
+  "seed_data_creation": "None. Seed data auto-populated by backend startup (15 team, 6 programs, 7 timeline, 6 news, 6 archives, 8 memories, 1 location, settings).",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend URL is REACT_APP_BACKEND_URL=https://kkn-integrated.preview.emergentagent.com. Run: pytest /app/backend/tests/backend_test.py -v. All CRUD, auth, settings, activity-logs, health endpoints pass. Only failing test: TestUpload::test_upload_png_success asserts the returned url is fetchable externally - it returns 403 because request.base_url resolves internally. Sidebar test-ids follow slug of the label (Team Members -> sidebar-team-members, not sidebar-team).",
+  "rca of the issue": "In server.py upload_file(): `base = str(request.base_url).rstrip('/')` uses the internal Kubernetes cluster hostname that Starlette sees from the incoming forwarded request. That URL (http://...cluster-5.preview.emergentcf.cloud) is not exposed publicly (returns 403 from ingress). Reproduction: POST /api/upload with a PNG using the public URL; inspect data.url in the response; GET that URL externally -> 403. Mitigation: (a) prefer env var like `PUBLIC_BASE_URL` or reuse `REACT_APP_BACKEND_URL` server-side; (b) OR return only `storageKey` and have the frontend build the URL as `${REACT_APP_BACKEND_URL}/api/files/${storageKey}`; (c) OR trust X-Forwarded-Host/Proto headers via a proxy middleware."
+}

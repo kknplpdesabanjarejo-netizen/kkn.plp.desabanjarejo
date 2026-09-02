@@ -1,0 +1,121 @@
+{
+  "theme": {
+    "mode": "hybrid_light_preferred",
+    "primary_archetype": "ORGANIC & EARTHY mixed with SWISS & HIGH-CONTRAST",
+    "tone": "Academic, authoritative, community-centered, warm, premium, official university platform"
+  },
+  "typography": {
+    "font_family_heading": "Plus Jakarta Sans, sans-serif",
+    "font_family_body": "Inter, sans-serif",
+    "font_family_mono": "JetBrains Mono, monospace",
+    "font_pairing_strategy": "Editorial Authority + Technical Precision (Swiss Humanist)",
+    "rules": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-emerald-950 dark:text-emerald-50 leading-tight",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100",
+      "h3": "text-xl sm:text-2xl font-semibold text-slate-800 dark:text-slate-200",
+      "h4": "text-lg sm:text-xl font-semibold text-slate-800 dark:text-slate-200",
+      "body": "text-base leading-relaxed text-slate-700 dark:text-slate-300",
+      "small_label": "text-xs uppercase tracking-widest font-semibold text-emerald-800 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800/50 inline-block mb-3"
+    }
+  },
+  "colors": {
+    "emerald_primary": "#064E3B",
+    "emerald_light": "#10B981",
+    "emerald_bg_soft": "#ECFDF5",
+    "navy_deep": "#0F172A",
+    "navy_card": "#1E293B",
+    "gold_accent": "#D97706",
+    "gold_amber": "#F59E0B",
+    "gold_bg_light": "#FEF3C7",
+    "sand_offwhite": "#F8FAFC",
+    "pure_white": "#FFFFFF",
+    "slate_muted": "#64748B",
+    "border_subtle": "rgba(16, 185, 129, 0.15)",
+    "dark_border": "rgba(255, 255, 255, 0.1)",
+    "rules": {
+      "tinted_grey": "Never use #000000 or plain gray. Always tint neutrals with slate/navy (#0F172A) or emerald tone.",
+      "cta_buttons": "Use primary emerald (#064E3B or hover #047857) or gold accent (#D97706) for primary CTAs.",
+      "overlay_opacity": "Hero overlay must be maximum bg-slate-950/50 or bg-emerald-950/60 to let photography shine."
+    }
+  },
+  "visual_enhancers": {
+    "surface_styles": [
+      {
+        "name": "Academic Crystal Glass",
+        "css": "bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-emerald-900/10 dark:border-white/10 shadow-lg shadow-emerald-950/5"
+      },
+      {
+        "name": "Gold Crest Highlight Card",
+        "css": "bg-gradient-to-br from-white via-slate-50 to-amber-50/30 dark:from-slate-900 dark:via-slate-900 dark:to-emerald-950/30 border-l-4 border-amber-500 shadow-md"
+      },
+      {
+        "name": "Subtle Grid Canvas",
+        "css": "bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:24px_24px] opacity-15"
+      }
+    ],
+    "textures": "Subtle noise overlays on dark surfaces, soft radial gold glows (#F59E0B) behind hero stats.",
+    "shadows": "Soft layered shadow: shadow-[0_10px_30px_-10px_rgba(6,78,59,0.08)]"
+  },
+  "grids": {
+    "mode": "TETRIS_AND_HIGH_DENSITY",
+    "public_site_grid": "grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-8 lg:gap-12",
+    "team_grid": "Exact 15 member layout: Row 1 (2 leader cards - standard/large), Row 2 (4 coordinator cards), Row 3 (4 division lead cards), Row 4 (5 member cards).",
+    "dashboard_grid": "grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
+  },
+  "layouts": {
+    "header": "Sticky glassmorphic navbar with logo (UIN Gusdur KKN-PLP Group 66), live navigation links, quick access jump menu, light/dark theme toggle, and Admin Portal CTA.",
+    "hero": "Split/Asymmetric hero with high impact typography, official university tag ('UIN K.H. Abdurrahman Wahid Pekalongan - 2026'), tagline 'Be Present. Learn. Serve.', action CTAs ('Explore Our Journey' and 'Meet the Team'), and live stats badge.",
+    "team": "Structured 15-member hierarchy layout in 2 / 4 / 4 / 5 row grouping with detailed modal view for each student.",
+    "timeline": "7-stage vertical interactive timeline with phase badges, key deliverables, and community impact indicators.",
+    "gallery": "Category filterable grid (All, Community, Teaching, Infrastructure, Social, Cultural) with full lightbox modal and keyboard navigation.",
+    "news": "Grid with featured article spotlight, search, topic filter tags, and reading modal view.",
+    "admin_dashboard": "Sidebar navigation (Dashboard, Team Members, Programs, Gallery, News, Timeline, Archives, Videos, Memories, Location, Settings, Activity Logs, Logout) with full CRUD tables, form dialogs, image dropzone mock, search/filter, and system activity logs."
+  },
+  "motion": {
+    "libraries": ["framer-motion", "lucide-react"],
+    "scroll_behavior": "Smooth scroll with active section link highlighting.",
+    "animations": {
+      "counters": "Animated statistical count-up triggers when entering view.",
+      "hover_card": "hover:-translate-y-1 hover:shadow-xl transition-all duration-300 ease-out",
+      "modal_fade": "initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}"
+    }
+  },
+  "accessibility": {
+    "contrast": "APCA & WCAG AA compliant (minimum 4.5:1 ratio for body text). Focus outlines always enabled.",
+    "data_testid_policy": "All buttons, links, search inputs, tabs, filter buttons, modals, and CRUD actions MUST have explicit data-testid attributes in kebab-case."
+  },
+  "media": {
+    "hero_image": "https://images.unsplash.com/photo-1543269865-cbf427effbad?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "team_photo_1": "https://images.unsplash.com/photo-1648915742771-516fc4196954?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "team_photo_2": "https://images.unsplash.com/photo-1566055390950-e8334302c8cb?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "community_teaching": "https://images.unsplash.com/photo-1542810634-71277d95dcbb?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "village_meeting": "https://images.unsplash.com/photo-1708593343442-7595427ddf7b?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "student_collaboration": "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "field_workshop": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?crop=entropy&cs=srgb&fm=jpg&q=85"
+  },
+  "image_urls": {
+    "hero_background": "https://images.unsplash.com/photo-1543269865-cbf427effbad?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "about_section": "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "community_work_1": "https://images.unsplash.com/photo-1542810634-71277d95dcbb?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "community_work_2": "https://images.unsplash.com/photo-1708593343442-7595427ddf7b?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "team_leaders": "https://images.unsplash.com/photo-1648915742771-516fc4196954?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "team_group": "https://images.unsplash.com/photo-1566055390950-e8334302c8cb?crop=entropy&cs=srgb&fm=jpg&q=85"
+  },
+  "3d_libraries": {
+    "recommendation": "Use lightweight SVG patterns, Framer Motion staggered cards, and Lucide react dynamic icons to ensure lightning fast load times."
+  },
+  "instructions_to_main_agent": [
+    "Ensure all 15 team members are rendered in the exact specified grouping: Row 1 = 2 members, Row 2 = 4 members, Row 3 = 4 members, Row 4 = 5 members.",
+    "Keep emerald green (#064E3B) and deep navy (#0F172A) with gold accents (#D97706) as core primary identity.",
+    "Implement both the public single page experience and the fully functional CMS Admin Dashboard with sidebar navigation.",
+    "Ensure all buttons, inputs, tabs, and interactive elements include explicit data-testid attributes for automated testing.",
+    "Provide modal dialogs for item details in Team, Programs, News, Gallery, Archives, and Admin CRUD operations."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Avoid default plain centered layouts or generic AI slop styling.",
+    "Never use pure black #000000 or plain gray. Always use tinted slate or emerald neutrals.",
+    "Every interactive element must have clear hover, active, and focus states with high contrast.",
+    "Do not use emojis for core action icons. Always use lucide-react or phosphor icons.",
+    "Ensure generous padding (p-6, p-8, p-12) to create breathing space in all components."
+  ]
+}
