@@ -52,9 +52,9 @@ export default function Team({ members, loading }) {
     <section id="team" className="py-24 bg-slate-50 dark:bg-slate-900" data-testid="team-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeader
-          label="Our Team"
-          title="15 students, one shared mission"
-          description="Meet the members of KKN-PLP Integrated Group 66 who bring presence, learning, and service to the community."
+          label="Tim Kami"
+          title="Kenali Tim Kami"
+          description="Temui anggota Kelompok 66 yang berkolaborasi dalam menjalankan rangkaian kegiatan KKN-PLP Terpadu."
           testId="team-header"
         />
         {loading ? (
@@ -70,7 +70,7 @@ export default function Team({ members, loading }) {
             ))}
           </div>
         ) : sorted.length === 0 ? (
-          <EmptyState title="No Team Members Yet" message="Team member profiles will appear here after the administrator adds them." testId="team-empty" />
+          <EmptyState title="Belum Ada Anggota Tim" message="Profil anggota tim akan tampil di sini setelah administrator menambahkannya." testId="team-empty" />
         ) : (
           <div className="space-y-6">
             {ROWS.map(([start, end], ri) => {

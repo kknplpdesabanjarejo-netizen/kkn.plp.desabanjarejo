@@ -5,17 +5,17 @@ import { SectionHeader, EmptyState } from "./ui";
 import Lightbox from "./Lightbox";
 import { Input } from "@/components/ui/input";
 
-const CATEGORIES = ["All", "Arrival", "Observation", "Education", "Religious Activities", "Social Activities", "Environment", "Digitalization", "Community Development", "Evaluation", "Closing"];
+const CATEGORIES = ["Semua", "Kedatangan", "Observasi", "Pendidikan", "Keagamaan", "Kegiatan Sosial", "Lingkungan", "Digitalisasi", "Pemberdayaan Masyarakat", "Evaluasi", "Penutupan"];
 
 export default function Gallery({ items, loading }) {
-  const [cat, setCat] = useState("All");
+  const [cat, setCat] = useState("Semua");
   const [q, setQ] = useState("");
   const [lbIndex, setLbIndex] = useState(-1);
 
   const published = (items || []).filter((i) => i.imageUrl);
   const filtered = useMemo(() => {
     return published
-      .filter((i) => cat === "All" || i.category === cat)
+      .filter((i) => cat === "Semua" || i.category === cat)
       .filter((i) => !q || (i.title || "").toLowerCase().includes(q.toLowerCase()) || (i.caption || "").toLowerCase().includes(q.toLowerCase()))
       .sort((a, b) => (a.order || 0) - (b.order || 0));
   }, [published, cat, q]);
@@ -23,7 +23,7 @@ export default function Gallery({ items, loading }) {
   return (
     <section id="gallery" className="py-24 bg-white dark:bg-slate-950" data-testid="gallery-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <SectionHeader label="Gallery" title="Moments from the field" description="A visual documentation of our activities, captured throughout the program." testId="gallery-header" />
+        <SectionHeader label="Galeri" title="Galeri Dokumentasi" description="Abadikan setiap momen, kegiatan, dan kebersamaan selama perjalanan KKN-PLP Terpadu." testId="gallery-header" />
 
         <div className="flex flex-col lg:flex-row gap-4 lg:items-center justify-between mb-8">
           <div className="flex flex-wrap gap-2">
@@ -42,7 +42,7 @@ export default function Gallery({ items, loading }) {
           </div>
           <div className="relative lg:w-64 shrink-0">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-            <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search photos..." className="pl-9 rounded-full" data-testid="gallery-search" />
+            <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Cari foto..." className="pl-9 rounded-full" data-testid="gallery-search" />
           </div>
         </div>
 
@@ -51,7 +51,7 @@ export default function Gallery({ items, loading }) {
             {Array.from({ length: 6 }).map((_, i) => <div key={i} className="h-56 rounded-2xl bg-slate-100 animate-pulse break-inside-avoid" />)}
           </div>
         ) : filtered.length === 0 ? (
-          <EmptyState title="No Documentation Yet" message="Activity documentation will appear here after the administrator adds content." testId="gallery-empty" />
+          <EmptyState title="Belum Ada Dokumentasi" message="Belum ada dokumentasi yang tersedia." testId="gallery-empty" />
         ) : (
           <div className="columns-2 md:columns-3 gap-4 space-y-4">
             {filtered.map((it, i) => (

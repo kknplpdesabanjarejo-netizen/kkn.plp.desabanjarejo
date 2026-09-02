@@ -12,11 +12,11 @@ export default function NewsSection({ items, loading }) {
   return (
     <section id="news" className="py-24 bg-slate-50 dark:bg-slate-900" data-testid="news-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <SectionHeader label="News" title="Stories from the journey" description="The latest activities, milestones, and stories from Group 66." testId="news-header" />
+        <SectionHeader label="Berita" title="Berita & Kegiatan" description="Ikuti berbagai cerita, kegiatan, dan perkembangan perjalanan KKN-PLP Terpadu Kelompok 66." testId="news-header" />
         {loading ? (
           <div className="grid lg:grid-cols-2 gap-6">{Array.from({ length: 4 }).map((_, i) => <div key={i} className="h-64 rounded-2xl bg-slate-100 animate-pulse" />)}</div>
         ) : sorted.length === 0 ? (
-          <EmptyState title="No News Yet" message="Activity stories will be updated soon." testId="news-empty" />
+          <EmptyState title="Belum Ada Berita" message="Belum ada berita yang tersedia." testId="news-empty" />
         ) : (
           <div className="grid lg:grid-cols-2 gap-6">
             {featured && (
@@ -39,7 +39,7 @@ export default function NewsSection({ items, loading }) {
                   <span className="inline-block text-xs font-semibold uppercase tracking-wider bg-amber-500 text-white px-3 py-1 rounded-full mb-3">{featured.category}</span>
                   <h3 className="font-display font-bold text-2xl leading-snug group-hover:text-amber-300 transition-colors">{featured.title}</h3>
                   <p className="mt-2 text-sm text-emerald-50/80 line-clamp-2">{featured.excerpt}</p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-amber-300 text-sm font-semibold">Read more <ArrowUpRight className="h-4 w-4" /></span>
+                  <span className="mt-4 inline-flex items-center gap-1 text-amber-300 text-sm font-semibold">Baca Selengkapnya <ArrowUpRight className="h-4 w-4" /></span>
                 </div>
               </motion.article>
             )}

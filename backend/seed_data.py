@@ -1,30 +1,30 @@
-"""Default seed content for KKN-PLP Group 66. Uses placeholders, never fabricates identities."""
+"""Konten seed default untuk KKN-PLP Terpadu Kelompok 66. Gunakan placeholder, jangan mengarang identitas."""
 
 TEAM_ROLES = [
-    "Group Coordinator",
-    "Vice Coordinator",
-    "Secretary",
-    "Treasurer",
-    "Education Division",
-    "Religious Division",
-    "Digitalization Division",
-    "Social Division",
-    "Environment Division",
-    "Community Development Division",
-    "Member",
-    "Member",
-    "Member",
-    "Member",
-    "Member",
+    "Koordinator Kelompok",
+    "Wakil Koordinator",
+    "Sekretaris",
+    "Bendahara",
+    "Divisi Pendidikan",
+    "Divisi Keagamaan",
+    "Divisi Digitalisasi",
+    "Divisi Sosial",
+    "Divisi Lingkungan",
+    "Divisi Pemberdayaan Masyarakat",
+    "Anggota",
+    "Anggota",
+    "Anggota",
+    "Anggota",
+    "Anggota",
 ]
 
 
 def team_members():
     return [
         {
-            "name": "[MEMBER NAME]",
-            "nim": "[STUDENT ID]",
-            "studyProgram": "[STUDY PROGRAM]",
+            "name": "[NAMA ANGGOTA]",
+            "nim": "[NIM]",
+            "studyProgram": "[PROGRAM STUDI]",
             "role": TEAM_ROLES[i],
             "photo": "",
             "bio": "",
@@ -39,12 +39,12 @@ def team_members():
 
 def programs():
     data = [
-        ("Education", "GraduationCap", "Learning support and classes for village children and youth."),
-        ("Religious Activities", "Moon", "Mentoring, TPQ support, and community religious programs."),
-        ("Digitalization", "Laptop", "Digital literacy and technology enablement for the community."),
-        ("Social Activities", "HeartHandshake", "Community engagement, events, and social solidarity programs."),
-        ("Environment", "Leaf", "Environmental conservation, greening, and cleanliness initiatives."),
-        ("Community Development", "Sprout", "Empowering local potential and sustainable village development."),
+        ("Pendidikan", "GraduationCap", "Mendukung kegiatan pembelajaran dan meningkatkan semangat belajar anak-anak serta masyarakat."),
+        ("Kegiatan Keagamaan", "Moon", "Mendukung kegiatan keagamaan dan pembinaan masyarakat melalui berbagai aktivitas positif."),
+        ("Digitalisasi", "Laptop", "Mendorong pemanfaatan teknologi digital untuk mendukung kebutuhan masyarakat."),
+        ("Kegiatan Sosial", "HeartHandshake", "Membangun kepedulian dan kebersamaan melalui kegiatan sosial bersama masyarakat."),
+        ("Lingkungan", "Leaf", "Mendorong kepedulian terhadap kebersihan, kelestarian, dan lingkungan sekitar."),
+        ("Pemberdayaan Masyarakat", "Sprout", "Mendukung potensi masyarakat melalui kegiatan pemberdayaan dan pengembangan kapasitas."),
     ]
     return [
         {
@@ -62,13 +62,13 @@ def programs():
 
 def timeline():
     stages = [
-        ("Arrival", "Team arrival and initial placement in the community."),
-        ("Observation", "Understanding the community, needs, and local potential."),
-        ("Planning", "Designing programs together with community stakeholders."),
-        ("Implementation", "Carrying out the planned community service programs."),
-        ("Collaboration", "Working hand in hand with residents and local officials."),
-        ("Evaluation", "Reflecting on outcomes and measuring community impact."),
-        ("Closing", "Farewell, handover, and sustainability of the programs."),
+        ("Datang", "Awal kedatangan dan pengenalan lingkungan masyarakat."),
+        ("Observasi", "Mengenali kondisi, kebutuhan, potensi, dan karakteristik masyarakat."),
+        ("Perencanaan", "Menyusun rencana kegiatan berdasarkan hasil observasi."),
+        ("Pelaksanaan", "Melaksanakan berbagai program bersama masyarakat."),
+        ("Kolaborasi", "Membangun kerja sama dan kebersamaan dengan berbagai pihak."),
+        ("Evaluasi", "Melakukan evaluasi terhadap kegiatan dan hasil yang telah dicapai."),
+        ("Penutupan", "Menutup rangkaian kegiatan dengan penuh rasa syukur dan kenangan."),
     ]
     return [
         {
@@ -92,25 +92,25 @@ def _slug(t):
 
 def news():
     titles = [
-        "Opening of Community Learning Classes for Village Children",
-        "Al-Hidayah TPQ Mentoring Program Receives Enthusiastic Participation",
-        "Community Clean-Up Activity Welcomes the Rainy Season",
-        "Digital Marketing Training for Local MSME Entrepreneurs",
-        "Community Cultural and Religious Celebration Filled with Competitions and Performances",
-        "Planting 100 Tree Seedlings in the Village Conservation Area",
+        "Pembukaan Kelas Belajar Bersama Anak-Anak Desa",
+        "Pendampingan TPQ Al-Hidayah Mendapat Antusiasme Masyarakat",
+        "Kegiatan Kerja Bakti Bersama Menyambut Musim Hujan",
+        "Pelatihan Digital Marketing bagi Pelaku UMKM",
+        "Kegiatan Perayaan Budaya dan Keagamaan Bersama Masyarakat",
+        "Penanaman 100 Bibit Pohon di Kawasan Konservasi Desa",
     ]
-    cats = ["Education", "Religious Activities", "Environment", "Digitalization", "Social Activities", "Environment"]
+    cats = ["Pendidikan", "Kegiatan Keagamaan", "Lingkungan", "Digitalisasi", "Kegiatan Sosial", "Lingkungan"]
     return [
         {
             "title": t,
             "slug": _slug(t),
-            "excerpt": "Activity story will be updated by the administrator.",
-            "content": "Full article content will be added by the administrator.",
+            "excerpt": "Cerita kegiatan akan diperbarui oleh administrator.",
+            "content": "Isi artikel lengkap akan ditambahkan oleh administrator.",
             "coverImage": "",
             "category": cats[i],
-            "location": "[VILLAGE NAME]",
+            "location": "[NAMA DESA]",
             "publishedAt": "",
-            "author": "KKN-PLP Group 66",
+            "author": "KKN-PLP Terpadu Kelompok 66",
             "isPublished": True,
             "order": i + 1,
         }
@@ -120,17 +120,17 @@ def news():
 
 def archives():
     items = [
-        ("KKN Activity Schedule", "schedule", "Calendar"),
-        ("Teaching Schedule", "schedule", "BookOpen"),
-        ("Daily Reports", "document", "FileText"),
-        ("KKN After Movie", "video", "Film"),
-        ("Village Profile Video", "video", "Video"),
-        ("Village Infographic", "image", "Image"),
+        ("Jadwal Kegiatan KKN", "schedule", "Calendar"),
+        ("Jadwal Mengajar", "schedule", "BookOpen"),
+        ("Laporan Harian", "document", "FileText"),
+        ("Video After Movie", "video", "Film"),
+        ("Video Profil Desa", "video", "Video"),
+        ("Infografis Desa", "image", "Image"),
     ]
     return [
         {
             "title": t,
-            "description": "This document has not been added yet.",
+            "description": "Dokumen belum tersedia.",
             "type": typ,
             "url": "",
             "embedUrl": "",
@@ -144,14 +144,14 @@ def archives():
 
 def memories():
     cats = [
-        "Beginning of the Journey",
-        "With Village Officials",
-        "With Students",
-        "Religious Activities",
-        "Community Service",
-        "With Local Entrepreneurs",
-        "Farewell Night",
-        "Memories with the Community",
+        "Awal Perjalanan",
+        "Bersama Perangkat Desa",
+        "Bersama Siswa",
+        "Kegiatan Keagamaan",
+        "Pengabdian kepada Masyarakat",
+        "Bersama Pelaku UMKM",
+        "Malam Perpisahan",
+        "Kenangan Bersama Masyarakat",
     ]
     return [
         {
@@ -170,10 +170,10 @@ def memories():
 def location():
     return [
         {
-            "village": "[VILLAGE NAME]",
-            "district": "[SUBDISTRICT]",
-            "regency": "[REGENCY]",
-            "province": "[PROVINCE]",
+            "village": "[NAMA DESA]",
+            "district": "[KECAMATAN]",
+            "regency": "[KABUPATEN]",
+            "province": "[PROVINSI]",
             "address": "",
             "latitude": "",
             "longitude": "",
@@ -195,11 +195,11 @@ def gallery():
 
 def settings():
     return {
-        "siteName": "KKN-PLP Integrated Group 66",
+        "siteName": "KKN-PLP Terpadu Kelompok 66",
         "university": "UIN K.H. Abdurrahman Wahid Pekalongan",
         "year": "2026",
-        "tagline": "Be Present. Learn. Serve.",
-        "description": "Official website of KKN-PLP Integrated Group 66 of UIN K.H. Abdurrahman Wahid Pekalongan, 2026.",
+        "tagline": "Hadirlah. Belajarlah. Mengabdilah.",
+        "description": "Belajar bersama masyarakat, berkarya, dan mengabdi untuk memberikan kontribusi nyata.",
         "instagram": "",
         "tiktok": "",
         "youtube": "",

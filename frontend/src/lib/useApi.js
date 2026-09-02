@@ -14,7 +14,7 @@ export function useResource(path) {
       const res = await api.get(`/${path}`);
       setData(res.data.data);
     } catch (e) {
-      setError("Unable to load content. Please try again.");
+      setError("Tidak dapat memuat konten. Silakan coba lagi.");
     } finally {
       setLoading(false);
     }

@@ -4,16 +4,16 @@ import { Button } from "@/components/ui/button";
 import { useTheme } from "@/context/ThemeContext";
 
 const LINKS = [
-  ["Home", "home"],
-  ["About", "about"],
-  ["Team", "team"],
-  ["Programs", "programs"],
-  ["Gallery", "gallery"],
-  ["News", "news"],
-  ["Archives", "archives"],
-  ["Journey", "timeline"],
-  ["Location", "location"],
-  ["Contact", "contact"],
+  ["Beranda", "home"],
+  ["Tentang Kami", "about"],
+  ["Tim", "team"],
+  ["Program", "programs"],
+  ["Galeri", "gallery"],
+  ["Berita", "news"],
+  ["Arsip", "archives"],
+  ["Perjalanan", "timeline"],
+  ["Lokasi", "location"],
+  ["Kontak", "contact"],
 ];
 
 export default function Navbar({ settings }) {
@@ -95,7 +95,7 @@ export default function Navbar({ settings }) {
             data-testid="nav-cta"
             className="bg-amber-500 hover:bg-amber-600 text-white rounded-full gap-1.5 font-semibold shadow-md shadow-amber-500/20"
           >
-            View Documentation <ArrowUpRight className="h-4 w-4" />
+            Lihat Dokumentasi <ArrowUpRight className="h-4 w-4" />
           </Button>
         </div>
 
@@ -122,14 +122,14 @@ export default function Navbar({ settings }) {
             </button>
           ))}
           <Button onClick={() => go("archives")} className="w-full mt-2 bg-amber-500 hover:bg-amber-600 text-white rounded-full font-semibold">
-            View Documentation
+            Lihat Dokumentasi
           </Button>
           <button
             onClick={toggle}
             data-testid="theme-toggle-mobile"
             className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-slate-700 dark:text-slate-200 font-medium hover:bg-emerald-50 dark:hover:bg-white/10"
           >
-            {theme === "dark" ? <><Sun className="h-4 w-4" /> Light mode</> : <><Moon className="h-4 w-4" /> Dark mode</>}
+            {theme === "dark" ? <><Sun className="h-4 w-4" /> Mode Terang</> : <><Moon className="h-4 w-4" /> Mode Gelap</>}
           </button>
         </div>
       )}

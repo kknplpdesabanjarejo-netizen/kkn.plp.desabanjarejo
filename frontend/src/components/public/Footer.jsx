@@ -17,19 +17,19 @@ export default function Footer({ settings }) {
             <p className="text-sm text-slate-400 leading-relaxed max-w-xs">{s.description}</p>
           </div>
           <div>
-            <h4 className="text-white font-semibold mb-4 font-display">Explore</h4>
+            <h4 className="text-white font-semibold mb-4 font-display">Jelajahi</h4>
             <ul className="space-y-2 text-sm">
-              {["about", "team", "programs", "gallery", "news"].map((id) => (
+              {[["Tentang Kami", "about"], ["Tim", "team"], ["Program", "programs"], ["Galeri", "gallery"], ["Berita", "news"]].map(([label, id]) => (
                 <li key={id}>
-                  <a href={`#${id}`} className="text-slate-400 hover:text-amber-400 capitalize transition-colors">
-                    {id}
+                  <a href={`#${id}`} className="text-slate-400 hover:text-amber-400 transition-colors">
+                    {label}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <h4 className="text-white font-semibold mb-4 font-display">Connect</h4>
+            <h4 className="text-white font-semibold mb-4 font-display">Terhubung</h4>
             <div className="flex gap-3 mb-4">
               {s.instagram && (
                 <a href={s.instagram} target="_blank" rel="noreferrer" className="h-10 w-10 grid place-items-center rounded-lg bg-white/5 hover:bg-emerald-800 transition-colors" aria-label="Instagram">
@@ -52,14 +52,14 @@ export default function Footer({ settings }) {
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6">
           <p className="text-xs text-slate-500">
-            © {s.year || "2026"} {s.siteName || "KKN-PLP Integrated Group 66"} · {s.university || "UIN K.H. Abdurrahman Wahid Pekalongan"}
+            © {s.year || "2026"} {s.siteName || "KKN-PLP Terpadu Kelompok 66"}. Seluruh hak cipta dilindungi.
           </p>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-amber-400"
             data-testid="footer-back-to-top"
           >
-            Back to top <ArrowUp className="h-3.5 w-3.5" />
+            Kembali ke atas <ArrowUp className="h-3.5 w-3.5" />
           </button>
         </div>
       </div>

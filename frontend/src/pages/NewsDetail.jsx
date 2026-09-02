@@ -34,10 +34,10 @@ export default function NewsDetail() {
       <div className="min-h-screen grid place-items-center bg-slate-50 text-center px-6">
         <div>
           <Newspaper className="h-12 w-12 text-emerald-300 mx-auto" />
-          <h1 className="mt-4 text-2xl font-display font-bold text-slate-900">Article not found</h1>
-          <p className="mt-2 text-slate-500">This story may have been moved or is not available yet.</p>
+          <h1 className="mt-4 text-2xl font-display font-bold text-slate-900">Artikel tidak ditemukan</h1>
+          <p className="mt-2 text-slate-500">Artikel ini mungkin telah dipindahkan atau belum tersedia.</p>
           <Link to="/#news" className="mt-6 inline-flex items-center gap-2 text-emerald-800 font-semibold">
-            <ArrowLeft className="h-4 w-4" /> Back to News
+            <ArrowLeft className="h-4 w-4" /> Kembali ke Berita
           </Link>
         </div>
       </div>
@@ -54,12 +54,12 @@ export default function NewsDetail() {
         <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 to-emerald-950/30" />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 h-full flex flex-col justify-end pb-10">
           <Link to="/#news" className="inline-flex items-center gap-2 text-amber-300 text-sm font-semibold mb-4 w-fit" data-testid="news-back">
-            <ArrowLeft className="h-4 w-4" /> Back to News
+            <ArrowLeft className="h-4 w-4" /> Kembali ke Berita
           </Link>
           <span className="inline-block w-fit text-xs font-semibold uppercase tracking-wider bg-amber-500 text-white px-3 py-1 rounded-full mb-3">{article.category}</span>
           <h1 className="text-3xl sm:text-4xl font-display font-extrabold text-white leading-tight">{article.title}</h1>
           <div className="mt-4 flex flex-wrap gap-4 text-sm text-emerald-50/80">
-            {article.author && <span>By {article.author}</span>}
+            {article.author && <span>Oleh {article.author}</span>}
             {article.location && <span className="flex items-center gap-1"><MapPin className="h-4 w-4" />{article.location}</span>}
             {article.publishedAt && <span className="flex items-center gap-1"><Calendar className="h-4 w-4" />{article.publishedAt}</span>}
           </div>

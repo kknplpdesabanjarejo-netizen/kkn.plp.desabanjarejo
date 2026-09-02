@@ -6,14 +6,14 @@ import { RESOURCES } from "@/pages/admin/resourceConfig";
 import { Loader2, Activity } from "lucide-react";
 
 const STAT_CARDS = [
-  ["teamMembers", "Team Members", "Users", "team"],
-  ["programAreas", "Program Areas", "LayoutGrid", "programs"],
-  ["documentationItems", "Documentation Items", "Images", "gallery"],
-  ["journeyStages", "Journey Stages", "GitCommitVertical", "timeline"],
-  ["news", "News Articles", "Newspaper", "news"],
-  ["archives", "Archives", "Archive", "archives"],
-  ["videos", "Videos", "Video", "videos"],
-  ["memories", "Memories", "Heart", "memories"],
+  ["teamMembers", "Anggota Tim", "Users", "team"],
+  ["programAreas", "Bidang Program", "LayoutGrid", "programs"],
+  ["documentationItems", "Dokumentasi", "Images", "gallery"],
+  ["journeyStages", "Tahapan Perjalanan", "GitCommitVertical", "timeline"],
+  ["news", "Artikel Berita", "Newspaper", "news"],
+  ["archives", "Arsip", "Archive", "archives"],
+  ["videos", "Video", "Video", "videos"],
+  ["memories", "Kenangan", "Heart", "memories"],
 ];
 
 const ACTION_COLORS = {
@@ -49,8 +49,8 @@ export default function AdminDashboard() {
   return (
     <div data-testid="admin-dashboard">
       <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-display font-bold text-slate-900">Dashboard</h1>
-        <p className="text-slate-500 mt-1">Overview of your website content and recent activity.</p>
+        <h1 className="text-2xl sm:text-3xl font-display font-bold text-slate-900">Dasbor</h1>
+        <p className="text-slate-500 mt-1">Ringkasan konten situs dan aktivitas terbaru.</p>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
@@ -68,7 +68,7 @@ export default function AdminDashboard() {
 
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 rounded-2xl border border-slate-100 bg-white p-6">
-          <h3 className="font-display font-bold text-slate-900 mb-4">Quick Manage</h3>
+          <h3 className="font-display font-bold text-slate-900 mb-4">Kelola Cepat</h3>
           <div className="grid sm:grid-cols-2 gap-3">
             {RESOURCES.map((r) => {
               const Ico = Icons[r.icon] || Icons.Circle;
@@ -85,10 +85,10 @@ export default function AdminDashboard() {
         <div className="rounded-2xl border border-slate-100 bg-white p-6">
           <div className="flex items-center gap-2 mb-4">
             <Activity className="h-5 w-5 text-emerald-800" />
-            <h3 className="font-display font-bold text-slate-900">Recent Activity</h3>
+            <h3 className="font-display font-bold text-slate-900">Aktivitas Terbaru</h3>
           </div>
           {logs.length === 0 ? (
-            <p className="text-sm text-slate-400">No activity yet.</p>
+            <p className="text-sm text-slate-400">Belum ada aktivitas.</p>
           ) : (
             <ul className="space-y-3">
               {logs.map((log) => (

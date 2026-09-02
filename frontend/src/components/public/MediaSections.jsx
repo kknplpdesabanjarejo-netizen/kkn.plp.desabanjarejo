@@ -19,11 +19,11 @@ export function Archives({ items, loading }) {
   return (
     <section id="archives" className="py-24 bg-white dark:bg-slate-950" data-testid="archives-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <SectionHeader label="Digital Archives" title="Documents & official records" description="Access schedules, reports, videos, and infographics from the program." testId="archives-header" />
+        <SectionHeader label="Arsip Digital" title="Arsip Digital" description="Temukan berbagai dokumen dan arsip kegiatan KKN-PLP Terpadu dalam satu tempat." testId="archives-header" />
         {loading ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">{Array.from({ length: 6 }).map((_, i) => <div key={i} className="h-40 rounded-2xl bg-slate-100 animate-pulse" />)}</div>
         ) : sorted.length === 0 ? (
-          <EmptyState title="No Archives Yet" message="Documents will appear here once added." testId="archives-empty" />
+          <EmptyState title="Belum Ada Arsip" message="Dokumen akan tampil di sini setelah ditambahkan." testId="archives-empty" />
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {sorted.map((a) => {
@@ -38,10 +38,10 @@ export function Archives({ items, loading }) {
                   <h3 className="mt-4 font-display font-semibold text-slate-900 dark:text-white">{a.title}</h3>
                   {link ? (
                     <a href={link} target="_blank" rel="noreferrer" data-testid={`archive-link-${a.order}`} className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-800 hover:text-emerald-600">
-                      Open document <ExternalLink className="h-4 w-4" />
+                      Buka Arsip <ExternalLink className="h-4 w-4" />
                     </a>
                   ) : (
-                    <p className="mt-3 text-sm text-slate-400 italic">Document not available yet.</p>
+                    <p className="mt-3 text-sm text-slate-400 italic">Dokumen belum tersedia.</p>
                   )}
                 </div>
               );
@@ -59,11 +59,11 @@ export function Videos({ items, loading }) {
   return (
     <section id="videos" className="py-24 bg-slate-50 dark:bg-slate-900" data-testid="videos-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <SectionHeader label="Video Center" title="Watch our journey unfold" description="Highlights and documentation captured on video." testId="videos-header" />
+        <SectionHeader label="Pusat Video" title="Pusat Video" description="Saksikan dokumentasi perjalanan, kegiatan, dan cerita Kelompok 66 melalui berbagai video." testId="videos-header" />
         {loading ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">{Array.from({ length: 3 }).map((_, i) => <div key={i} className="h-48 rounded-2xl bg-slate-100 animate-pulse" />)}</div>
         ) : sorted.length === 0 ? (
-          <EmptyState title="No Videos Yet" message="Video documentation will be added soon. Coming Soon." testId="videos-empty" />
+          <EmptyState title="Belum Ada Video" message="Belum ada video yang tersedia. Segera Hadir." testId="videos-empty" />
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {sorted.map((v) => (
@@ -102,11 +102,11 @@ export function Memories({ items, loading }) {
   return (
     <section id="memories" className="py-24 bg-white dark:bg-slate-950" data-testid="memories-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <SectionHeader label="Memories" title="Chapters we will always carry" description="The moments and connections that made this journey unforgettable." testId="memories-header" />
+        <SectionHeader label="Kenangan" title="Kenangan Perjalanan" description="Setiap pertemuan meninggalkan cerita, dan setiap kebersamaan menjadi kenangan." testId="memories-header" />
         {loading ? (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">{Array.from({ length: 8 }).map((_, i) => <div key={i} className="h-36 rounded-2xl bg-slate-100 animate-pulse" />)}</div>
         ) : sorted.length === 0 ? (
-          <EmptyState title="No Memories Yet" message="Memory chapters will appear here once added." testId="memories-empty" />
+          <EmptyState title="Belum Ada Kenangan" message="Kenangan perjalanan akan tampil di sini setelah ditambahkan." testId="memories-empty" />
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {sorted.map((m, i) => (

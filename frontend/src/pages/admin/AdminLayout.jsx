@@ -31,6 +31,7 @@ export default function AdminLayout() {
         end={end}
         onClick={() => setOpen(false)}
         data-testid={`sidebar-${label.toLowerCase().replace(/\s+/g, "-")}`}
+        title={label}
         className={({ isActive }) =>
           `flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
             isActive ? "bg-emerald-800 text-white" : "text-emerald-100/70 hover:bg-white/10 hover:text-white"
@@ -52,19 +53,19 @@ export default function AdminLayout() {
         </span>
       </Link>
       <nav className="flex-1 space-y-1 overflow-y-auto pr-1">
-        <NavItem to="/admin" icon="LayoutDashboard" label="Dashboard" end />
+        <NavItem to="/admin" icon="LayoutDashboard" label="Dasbor" end />
         {RESOURCES.map((r) => (
           <NavItem key={r.path} to={`/admin/${r.path}`} icon={r.icon} label={r.label} />
         ))}
-        <NavItem to="/admin/settings" icon="Settings" label="Settings" />
-        <NavItem to="/admin/activity-logs" icon="ScrollText" label="Activity Logs" />
+        <NavItem to="/admin/settings" icon="Settings" label="Pengaturan" />
+        <NavItem to="/admin/activity-logs" icon="ScrollText" label="Log Aktivitas" />
       </nav>
       <div className="pt-4 mt-4 border-t border-white/10 space-y-1">
         <a href="/" target="_blank" rel="noreferrer" className="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-emerald-100/70 hover:bg-white/10 hover:text-white">
-          <ExternalLink className="h-4 w-4" /> View Site
+          <ExternalLink className="h-4 w-4" /> Lihat Situs
         </a>
         <button onClick={doLogout} data-testid="sidebar-logout" className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-red-200 hover:bg-red-500/20">
-          <LogOut className="h-4 w-4" /> Logout
+          <LogOut className="h-4 w-4" /> Keluar
         </button>
       </div>
     </div>

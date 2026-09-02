@@ -21,14 +21,14 @@ export default function ActivityLogsPage() {
 
   return (
     <div data-testid="activity-logs-page">
-      <h1 className="text-2xl font-display font-bold text-slate-900 mb-1">Activity Logs</h1>
-      <p className="text-slate-500 text-sm mb-6">A record of administrative actions on the platform.</p>
+      <h1 className="text-2xl font-display font-bold text-slate-900 mb-1">Log Aktivitas</h1>
+      <p className="text-slate-500 text-sm mb-6">Catatan tindakan administratif pada platform.</p>
       {loading ? (
         <div className="grid place-items-center py-24"><Loader2 className="h-8 w-8 animate-spin text-emerald-800" /></div>
       ) : logs.length === 0 ? (
         <div className="flex flex-col items-center py-16 rounded-2xl border border-dashed border-slate-200 bg-white">
           <ScrollText className="h-10 w-10 text-slate-300" />
-          <p className="mt-3 text-slate-500">No activity recorded yet.</p>
+          <p className="mt-3 text-slate-500">Belum ada aktivitas tercatat.</p>
         </div>
       ) : (
         <div className="rounded-2xl border border-slate-100 bg-white overflow-hidden">
@@ -36,11 +36,11 @@ export default function ActivityLogsPage() {
             <table className="w-full text-sm">
               <thead className="bg-slate-50 text-slate-500 text-left">
                 <tr>
-                  <th className="px-4 py-3 font-medium">Action</th>
-                  <th className="px-4 py-3 font-medium">Resource</th>
-                  <th className="px-4 py-3 font-medium">User</th>
+                  <th className="px-4 py-3 font-medium">Aksi</th>
+                  <th className="px-4 py-3 font-medium">Sumber Daya</th>
+                  <th className="px-4 py-3 font-medium">Pengguna</th>
                   <th className="px-4 py-3 font-medium">IP</th>
-                  <th className="px-4 py-3 font-medium">Time</th>
+                  <th className="px-4 py-3 font-medium">Waktu</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">

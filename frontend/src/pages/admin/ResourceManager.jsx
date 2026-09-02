@@ -29,9 +29,9 @@ function ImageField({ value, onChange, testId }) {
       fd.append("file", file);
       const res = await api.post("/upload", fd, { headers: { "Content-Type": "multipart/form-data" } });
       onChange(res.data.data.url);
-      toast.success("Image uploaded");
+      toast.success("Gambar berhasil diunggah");
     } catch (e) {
-      toast.error(formatApiError(e.response?.data?.detail) || "Upload failed");
+      toast.error(formatApiError(e.response?.data?.detail) || "Unggahan gagal");
     } finally {
       setUploading(false);
     }
@@ -49,7 +49,7 @@ function ImageField({ value, onChange, testId }) {
         </div>
       ) : (
         <button type="button" onClick={() => inputRef.current?.click()} disabled={uploading} data-testid={`${testId}-btn`} className="w-40 h-40 rounded-xl border-2 border-dashed border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/50 grid place-items-center text-slate-400 transition-colors">
-          {uploading ? <Loader2 className="h-6 w-6 animate-spin" /> : <div className="text-center"><Upload className="h-6 w-6 mx-auto" /><span className="text-xs mt-1 block">Upload</span></div>}
+          {uploading ? <Loader2 className="h-6 w-6 animate-spin" /> : <div className="text-center"><Upload className="h-6 w-6 mx-auto" /><span className="text-xs mt-1 block">Unggah</span></div>}
         </button>
       )}
     </div>
@@ -67,11 +67,11 @@ function FieldInput({ field, value, onChange }) {
   if (field.type === "image")
     return <ImageField value={value} onChange={onChange} testId={tid} />;
   if (field.type === "tags")
-    return <Textarea value={Array.isArray(value) ? value.join("\n") : value || ""} onChange={(e) => onChange(e.target.value.split("\n").map((s) => s.trim()).filter(Boolean))} rows={3} placeholder="One item per line" data-testid={tid} />;
+    return <Textarea value={Array.isArray(value) ? value.join("\n") : value || ""} onChange={(e) => onChange(e.target.value.split("\n").map((s) => s.trim()).filter(Boolean))} rows={3} placeholder="Satu item per baris" data-testid={tid} />;
   if (field.type === "select")
     return (
       <Select value={value || ""} onValueChange={onChange}>
-        <SelectTrigger data-testid={tid}><SelectValue placeholder="Select..." /></SelectTrigger>
+        <SelectTrigger data-testid={tid}><SelectValue placeholder="Pilih..." /></SelectTrigger>
         <SelectContent>{field.options.map((o) => <SelectItem key={o} value={o}>{o}</SelectItem>)}</SelectContent>
       </Select>
     );
@@ -118,11 +118,11 @@ export default function ResourceManager({ config }) {
     try {
       if (editing) await api.put(`/${config.path}/${editing.id}`, payload);
       else await api.post(`/${config.path}`, payload);
-      toast.success(`${config.singular} ${editing ? "updated" : "created"}`);
+      toast.success(`${config.singular} berhasil ${editing ? "diperbarui" : "disimpan"}`);
       setDialogOpen(false);
       refetch();
     } catch (err) {
-      toast.error(formatApiError(err.response?.data?.detail) || "Save failed");
+      toast.error(formatApiError(err.response?.data?.detail) || "Gagal menyimpan");
     } finally {
       setSaving(false);
     }
@@ -131,11 +131,11 @@ export default function ResourceManager({ config }) {
   const doDelete = async () => {
     try {
       await api.delete(`/${config.path}/${deleteTarget.id}`);
-      toast.success(`${config.singular} deleted`);
+      toast.success(`${config.singular} berhasil dihapus`);
       setDeleteTarget(null);
       refetch();
     } catch (err) {
-      toast.error("Delete failed");
+      toast.error("Gagal menghapus");
     }
   };
 
@@ -159,10 +159,10 @@ export default function ResourceManager({ config }) {
       await Promise.all(
         reordered.map((it, idx) => (it.order !== idx + 1 ? api.put(`/${config.path}/${it.id}`, { order: idx + 1 }) : null)).filter(Boolean)
       );
-      toast.success("Order updated");
+      toast.success("Urutan berhasil diperbarui");
       refetch();
     } catch {
-      toast.error("Reorder failed");
+      toast.error("Gagal mengubah urutan");
     }
   };
 
@@ -187,10 +187,10 @@ export default function ResourceManager({ config }) {
         await api.post(`/${config.path}`, payload);
         created += 1;
       }
-      toast.success(`${created} ${created === 1 ? "item" : "items"} uploaded`);
+      toast.success(`${created} ${created === 1 ? "item" : "item"} berhasil diunggah`);
       refetch();
     } catch (e) {
-      toast.error(formatApiError(e.response?.data?.detail) || "Some uploads failed");
+      toast.error(formatApiError(e.response?.data?.detail) || "Sebagian unggahan gagal");
       refetch();
     } finally {
       setBulkUploading(false);
@@ -202,21 +202,21 @@ export default function ResourceManager({ config }) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <h1 className="text-2xl font-display font-bold text-slate-900">{config.label}</h1>
-          <p className="text-slate-500 text-sm mt-0.5">{data.length} {data.length === 1 ? "item" : "items"}</p>
+          <p className="text-slate-500 text-sm mt-0.5">{data.length} {data.length === 1 ? "item" : "item"}</p>
         </div>
         <div className="flex gap-3">
           <div className="relative flex-1 sm:w-56">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-            <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search..." className="pl-9" data-testid={`${config.path}-search`} />
+            <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Cari..." className="pl-9" data-testid={`${config.path}-search`} />
           </div>
           <Button onClick={openNew} className="bg-emerald-900 hover:bg-emerald-800 gap-1.5 shrink-0" data-testid={`${config.path}-add`}>
-            <Plus className="h-4 w-4" /> Add
+            <Plus className="h-4 w-4" /> Tambah
           </Button>
           {config.bulkImage && (
             <>
               <input ref={bulkRef} type="file" accept="image/jpeg,image/png,image/webp" multiple className="hidden" data-testid={`${config.path}-bulk-input`} onChange={(e) => { bulkUpload(e.target.files); e.target.value = ""; }} />
               <Button onClick={() => bulkRef.current?.click()} disabled={bulkUploading} variant="outline" className="gap-1.5 shrink-0 border-emerald-200 text-emerald-800 hover:bg-emerald-50" data-testid={`${config.path}-bulk-upload`}>
-                {bulkUploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ImagePlus className="h-4 w-4" />} Bulk Upload
+                {bulkUploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ImagePlus className="h-4 w-4" />} Unggah Massal
               </Button>
             </>
           )}
@@ -228,8 +228,8 @@ export default function ResourceManager({ config }) {
       ) : filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 rounded-2xl border border-dashed border-slate-200 bg-white text-center" data-testid={`${config.path}-empty`}>
           <Inbox className="h-10 w-10 text-slate-300" />
-          <p className="mt-3 font-display font-semibold text-slate-700">No {config.label} yet</p>
-          <p className="text-sm text-slate-400 mt-1">Click "Add" to create your first {config.singular.toLowerCase()}.</p>
+          <p className="mt-3 font-display font-semibold text-slate-700">Belum ada {config.label}</p>
+          <p className="text-sm text-slate-400 mt-1">Klik "Tambah" untuk membuat {config.singular.toLowerCase()} pertama Anda.</p>
         </div>
       ) : (
         <div className="rounded-2xl border border-slate-100 bg-white overflow-hidden">
@@ -241,7 +241,7 @@ export default function ResourceManager({ config }) {
                   {imageField && <th className="px-4 py-3 font-medium w-16"></th>}
                   {config.columns.map((c) => <th key={c} className="px-4 py-3 font-medium capitalize">{c}</th>)}
                   <th className="px-4 py-3 font-medium">Status</th>
-                  <th className="px-4 py-3 font-medium text-right">Actions</th>
+                  <th className="px-4 py-3 font-medium text-right">Aksi</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -268,7 +268,7 @@ export default function ResourceManager({ config }) {
                       )}
                       {config.columns.map((c) => <td key={c} className="px-4 py-3 text-slate-700 max-w-[200px] truncate">{String(item[c] ?? "—")}</td>)}
                       <td className="px-4 py-3">
-                        {hasStatus ? <Badge variant={active ? "default" : "secondary"} className={active ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-100" : ""}>{active ? "Active" : "Hidden"}</Badge> : "—"}
+                        {hasStatus ? <Badge variant={active ? "default" : "secondary"} className={active ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-100" : ""}>{active ? "Aktif" : "Tersembunyi"}</Badge> : "—"}
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex justify-end gap-1">
@@ -288,7 +288,7 @@ export default function ResourceManager({ config }) {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto" data-testid={`${config.path}-dialog`}>
           <DialogHeader>
-            <DialogTitle>{editing ? `Edit ${config.singular}` : `New ${config.singular}`}</DialogTitle>
+            <DialogTitle>{editing ? `Edit ${config.singular}` : `Tambah ${config.singular}`}</DialogTitle>
           </DialogHeader>
           <form onSubmit={save} className="space-y-4">
             {config.fields.map((f) => (
@@ -300,9 +300,9 @@ export default function ResourceManager({ config }) {
               </div>
             ))}
             <DialogFooter className="pt-2">
-              <Button type="button" variant="outline" onClick={() => setDialogOpen(false)}>Cancel</Button>
+              <Button type="button" variant="outline" onClick={() => setDialogOpen(false)}>Batal</Button>
               <Button type="submit" disabled={saving} className="bg-emerald-900 hover:bg-emerald-800" data-testid={`${config.path}-save`}>
-                {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : "Save"}
+                {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : "Simpan"}
               </Button>
             </DialogFooter>
           </form>
@@ -312,12 +312,12 @@ export default function ResourceManager({ config }) {
       <AlertDialog open={!!deleteTarget} onOpenChange={(o) => !o && setDeleteTarget(null)}>
         <AlertDialogContent data-testid="delete-confirm-dialog">
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete this {config.singular.toLowerCase()}?</AlertDialogTitle>
-            <AlertDialogDescription>This action cannot be undone. The item will be permanently removed.</AlertDialogDescription>
+            <AlertDialogTitle>Hapus {config.singular.toLowerCase()} ini?</AlertDialogTitle>
+            <AlertDialogDescription>Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={doDelete} className="bg-red-600 hover:bg-red-700" data-testid="confirm-delete">Delete</AlertDialogAction>
+            <AlertDialogCancel>Batal</AlertDialogCancel>
+            <AlertDialogAction onClick={doDelete} className="bg-red-600 hover:bg-red-700" data-testid="confirm-delete">Hapus</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

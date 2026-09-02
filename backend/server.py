@@ -81,7 +81,7 @@ async def optional_user(request: Request) -> Optional[dict]:
 async def require_user(request: Request) -> dict:
     user = await optional_user(request)
     if not user:
-        raise HTTPException(status_code=401, detail="Not authenticated")
+        raise HTTPException(status_code=401, detail="Anda harus masuk terlebih dahulu.")
     return user
 
 
@@ -111,9 +111,9 @@ async def login(request: Request, response: Response, body: LoginInput):
     email = body.email.lower()
     user = await db.users.find_one({"email": email})
     if not user or not authmod.verify_password(body.password, user["password_hash"]):
-        raise HTTPException(status_code=401, detail="Invalid email or password")
+        raise HTTPException(status_code=401, detail="Email atau kata sandi tidak valid.")
     if not user.get("isActive", True):
-        raise HTTPException(status_code=403, detail="Account is inactive")
+        raise HTTPException(status_code=403, detail="Akun tidak aktif.")
     token = authmod.create_access_token(user["id"], user["email"])
     response.set_cookie("access_token", token, httponly=True, secure=True, samesite="none", max_age=604800, path="/")
     await log_activity(serialize(user), "LOGIN", "auth", user["id"], request)
@@ -124,7 +124,7 @@ async def login(request: Request, response: Response, body: LoginInput):
 async def logout(request: Request, response: Response, user=Depends(require_user)):
     response.delete_cookie("access_token", path="/")
     await log_activity(user, "LOGOUT", "auth", user["id"], request)
-    return ok({"message": "Logged out"})
+    return ok({"message": "Berhasil keluar."})
 
 
 @api_router.get("/auth/me")
@@ -137,17 +137,17 @@ async def me(user=Depends(require_user)):
 async def upload_file(request: Request, file: UploadFile = File(...), user=Depends(require_user)):
     ext = (file.filename.rsplit(".", 1)[-1] if "." in file.filename else "").lower()
     if ext not in ALLOWED_EXT:
-        raise HTTPException(status_code=400, detail="Unsupported file type. Use JPEG, PNG or WEBP.")
+        raise HTTPException(status_code=400, detail="Format file tidak didukung. Gunakan JPEG, PNG, atau WEBP.")
     data = await file.read()
     if len(data) > MAX_FILE_SIZE:
-        raise HTTPException(status_code=400, detail="File too large. Maximum size is 5MB.")
+        raise HTTPException(status_code=400, detail="Ukuran file terlalu besar. Maksimal 5MB.")
     path = f"{storage.APP_NAME}/uploads/{uuid.uuid4()}.{ext}"
     content_type = storage.MIME_TYPES[ext]
     try:
         result = storage.put_object(path, data, content_type)
     except Exception as e:
         logger.error(f"Upload failed: {e}")
-        raise HTTPException(status_code=502, detail="File upload failed. Please try again.")
+        raise HTTPException(status_code=502, detail="Unggahan gagal. Silakan coba lagi.")
     stored_path = result["path"]
     await db.files.insert_one({
         "id": str(uuid.uuid4()),
@@ -167,11 +167,11 @@ async def upload_file(request: Request, file: UploadFile = File(...), user=Depen
 async def serve_file(path: str):
     record = await db.files.find_one({"storage_path": path, "is_deleted": False})
     if not record:
-        raise HTTPException(status_code=404, detail="File not found")
+        raise HTTPException(status_code=404, detail="File tidak ditemukan.")
     try:
         data, content_type = storage.get_object(path)
     except Exception:
-        raise HTTPException(status_code=404, detail="File not found")
+        raise HTTPException(status_code=404, detail="File tidak ditemukan.")
     return Response(content=data, media_type=record.get("content_type", content_type),
                     headers={"Cache-Control": "public, max-age=31536000"})
 
@@ -202,7 +202,7 @@ def register_crud(path: str, collection: str, hide_field: Optional[str] = None):
         body["updated_at"] = now_iso()
         res = await db[collection].update_one({"id": item_id}, {"$set": body})
         if res.matched_count == 0:
-            raise HTTPException(status_code=404, detail="Item not found")
+            raise HTTPException(status_code=404, detail="Data tidak ditemukan.")
         doc = await db[collection].find_one({"id": item_id})
         await log_activity(user, "UPDATE", collection, item_id, request)
         return ok(serialize(doc))
@@ -210,7 +210,7 @@ def register_crud(path: str, collection: str, hide_field: Optional[str] = None):
     async def delete_item(item_id: str, request: Request, user=Depends(require_user)):
         res = await db[collection].delete_one({"id": item_id})
         if res.deleted_count == 0:
-            raise HTTPException(status_code=404, detail="Item not found")
+            raise HTTPException(status_code=404, detail="Data tidak ditemukan.")
         await log_activity(user, "DELETE", collection, item_id, request)
         return ok({"id": item_id})
 
@@ -238,7 +238,7 @@ register_crud("news", "news", hide_field="isPublished")
 async def news_by_slug(slug: str):
     doc = await db.news.find_one({"slug": slug})
     if not doc:
-        raise HTTPException(status_code=404, detail="Article not found")
+        raise HTTPException(status_code=404, detail="Artikel tidak ditemukan.")
     return ok(serialize(doc))
 
 
@@ -327,7 +327,7 @@ app.add_middleware(
 @app.exception_handler(Exception)
 async def generic_error_handler(request: Request, exc: Exception):
     logger.error(f"Unhandled error on {request.url.path}: {exc}")
-    return JSONResponse(status_code=500, content={"success": False, "message": "Something went wrong. Please try again.", "code": "INTERNAL_ERROR"})
+    return JSONResponse(status_code=500, content={"success": False, "message": "Terjadi kesalahan. Silakan coba lagi.", "code": "INTERNAL_ERROR"})
 
 
 async def seed():
@@ -341,7 +341,7 @@ async def seed():
     if not existing:
         await db.users.insert_one({
             "id": str(uuid.uuid4()),
-            "name": "KKN-PLP Group 66 Admin",
+            "name": "Administrator KKN-PLP Kelompok 66",
             "email": admin_email,
             "password_hash": authmod.hash_password(admin_password),
             "role": "admin",

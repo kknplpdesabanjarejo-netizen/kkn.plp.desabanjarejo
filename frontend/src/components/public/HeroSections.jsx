@@ -79,7 +79,7 @@ export function Hero({ settings }) {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-6 text-base sm:text-lg text-emerald-50/90 leading-relaxed max-w-xl"
           >
-            Documenting the journey of students as they learn with the community, build meaningful collaboration, and create real contributions through the Integrated KKN-PLP program.
+            Dokumentasi perjalanan mahasiswa dalam belajar bersama masyarakat, membangun kolaborasi, dan memberikan kontribusi nyata melalui program KKN-PLP Terpadu.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -92,7 +92,7 @@ export function Hero({ settings }) {
               data-testid="hero-cta-primary"
               className="bg-amber-500 hover:bg-amber-600 text-white rounded-full h-12 px-7 text-base font-semibold gap-2 shadow-xl shadow-amber-900/20"
             >
-              Explore Our Journey <ArrowRight className="h-5 w-5" />
+              Jelajahi Perjalanan Kami <ArrowRight className="h-5 w-5" />
             </Button>
             <Button
               onClick={() => document.getElementById("team")?.scrollIntoView({ behavior: "smooth" })}
@@ -100,7 +100,7 @@ export function Hero({ settings }) {
               variant="outline"
               className="rounded-full h-12 px-7 text-base font-semibold bg-white/10 text-white border-white/30 hover:bg-white/20 hover:text-white backdrop-blur-sm"
             >
-              Meet the Team
+              Kenali Tim Kami
             </Button>
           </motion.div>
         </div>
@@ -122,25 +122,25 @@ export function About({ settings }) {
         >
           <img src={ABOUT_IMG} alt="Students collaborating with the community" className="rounded-3xl shadow-2xl shadow-emerald-950/10 w-full object-cover aspect-[4/3]" />
           <div className="absolute -bottom-6 -right-4 sm:right-6 glass rounded-2xl border border-emerald-900/10 shadow-xl p-5 max-w-[220px]">
-            <p className="font-display font-bold text-emerald-900 text-lg">Community First</p>
-            <p className="text-sm text-slate-600 mt-1">Learning by serving, growing together with the village.</p>
+            <p className="font-display font-bold text-emerald-900 text-lg">Masyarakat yang Utama</p>
+            <p className="text-sm text-slate-600 mt-1">Belajar dengan mengabdi, tumbuh bersama masyarakat desa.</p>
           </div>
         </motion.div>
         <div>
           <span className="text-xs uppercase tracking-widest font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 inline-block mb-4">
-            About the Program
+            Tentang Program
           </span>
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white tracking-tight">
-            A journey of presence, learning, and service
+            Tentang KKN-PLP Terpadu
           </h2>
           <p className="mt-5 text-slate-600 dark:text-slate-300 leading-relaxed">
-            KKN-PLP Integrated Group 66 unites community service (KKN) and educational field practice (PLP) into a single, meaningful experience. Our students live alongside the community, understand its needs, and design programs that create lasting, real impact.
+            KKN-PLP Terpadu merupakan wadah bagi mahasiswa untuk mengembangkan pengalaman akademik dan sosial melalui keterlibatan langsung bersama masyarakat. Melalui kegiatan pendidikan, keagamaan, sosial, digitalisasi, lingkungan, dan pemberdayaan masyarakat, mahasiswa berupaya menghadirkan kontribusi yang bermanfaat dan berkelanjutan.
           </p>
           <p className="mt-4 text-slate-600 dark:text-slate-300 leading-relaxed">
-            This platform documents every step of our journey — from arrival and observation to implementation, collaboration, and a heartfelt closing.
+            Platform ini mendokumentasikan setiap langkah perjalanan kami — mulai dari kedatangan dan observasi hingga pelaksanaan, kolaborasi, dan penutupan yang penuh makna.
           </p>
           <div className="mt-8 grid grid-cols-3 gap-4">
-            {[["Be Present", "Show up fully"], ["Learn", "From the community"], ["Serve", "With purpose"]].map(([t, d]) => (
+            {[["Hadir", "Hadir sepenuhnya"], ["Belajar", "Bersama masyarakat"], ["Mengabdi", "Dengan sepenuh hati"]].map(([t, d]) => (
               <div key={t} className="rounded-xl border border-emerald-100 bg-emerald-50/50 dark:border-emerald-900/40 dark:bg-emerald-900/20 p-4">
                 <p className="font-display font-bold text-emerald-900 dark:text-emerald-300">{t}</p>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{d}</p>
@@ -168,10 +168,10 @@ export function Statistics({ stats }) {
   }, []);
   const s = stats || {};
   const data = [
-    [s.teamMembers ?? 15, "", "Team Members"],
-    [s.programAreas ?? 6, "", "Program Areas"],
-    [s.documentationItems ?? 14, "+", "Documentation Items"],
-    [s.journeyStages ?? 7, "", "Journey Stages"],
+    [s.teamMembers ?? 15, "", "Anggota Tim"],
+    [s.programAreas ?? 6, "", "Bidang Program"],
+    [s.documentationItems ?? 14, "+", "Dokumentasi"],
+    [s.journeyStages ?? 7, "", "Tahapan Perjalanan"],
   ];
   return (
     <section ref={ref} className="py-16 bg-slate-50 dark:bg-slate-900 border-y border-slate-100 dark:border-white/10" data-testid="statistics-section">
@@ -185,12 +185,12 @@ export function Statistics({ stats }) {
 }
 
 const QUICK = [
-  ["Digital Archives", Archive, "archives"],
-  ["Activity News", Newspaper, "news"],
-  ["Photo Gallery", Images, "gallery"],
-  ["Video Center", Video, "videos"],
-  ["Our Team", Users, "team"],
-  ["Location", MapPin, "location"],
+  ["Arsip Digital", Archive, "archives"],
+  ["Berita Kegiatan", Newspaper, "news"],
+  ["Galeri Foto", Images, "gallery"],
+  ["Pusat Video", Video, "videos"],
+  ["Anggota Tim", Users, "team"],
+  ["Lokasi Kegiatan", MapPin, "location"],
 ];
 
 export function QuickAccess() {
@@ -199,7 +199,7 @@ export function QuickAccess() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center gap-3 mb-10">
           <Compass className="h-6 w-6 text-emerald-800 dark:text-emerald-400" />
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">Quick Access</h2>
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">Akses Cepat</h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           {QUICK.map(([label, Icon, id], i) => (
