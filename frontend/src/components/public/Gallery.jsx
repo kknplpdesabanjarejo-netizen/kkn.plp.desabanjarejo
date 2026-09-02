@@ -21,7 +21,7 @@ export default function Gallery({ items, loading }) {
   }, [published, cat, q]);
 
   return (
-    <section id="gallery" className="py-24 bg-white" data-testid="gallery-section">
+    <section id="gallery" className="py-24 bg-white dark:bg-slate-950" data-testid="gallery-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeader label="Gallery" title="Moments from the field" description="A visual documentation of our activities, captured throughout the program." testId="gallery-header" />
 
@@ -33,7 +33,7 @@ export default function Gallery({ items, loading }) {
                 onClick={() => setCat(c)}
                 data-testid={`gallery-filter-${c.toLowerCase().replace(/\s+/g, "-")}`}
                 className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                  cat === c ? "bg-emerald-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-emerald-50 hover:text-emerald-800"
+                  cat === c ? "bg-emerald-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-emerald-50 hover:text-emerald-800 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-emerald-900/40 dark:hover:text-emerald-300"
                 }`}
               >
                 {c}

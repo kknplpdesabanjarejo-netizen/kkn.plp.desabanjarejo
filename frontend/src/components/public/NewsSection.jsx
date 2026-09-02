@@ -10,7 +10,7 @@ export default function NewsSection({ items, loading }) {
   const rest = sorted.slice(1);
 
   return (
-    <section id="news" className="py-24 bg-slate-50" data-testid="news-section">
+    <section id="news" className="py-24 bg-slate-50 dark:bg-slate-900" data-testid="news-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeader label="News" title="Stories from the journey" description="The latest activities, milestones, and stories from Group 66." testId="news-header" />
         {loading ? (
@@ -53,14 +53,14 @@ export default function NewsSection({ items, loading }) {
                   transition={{ duration: 0.4, delay: i * 0.05 }}
                   onClick={() => navigate(`/news/${n.slug}`)}
                   data-testid={`news-card-${i}`}
-                  className="group cursor-pointer flex gap-4 rounded-2xl border border-slate-100 bg-white p-4 hover:shadow-lg hover:border-emerald-200 transition-all"
+                  className="group cursor-pointer flex gap-4 rounded-2xl border border-slate-100 bg-white dark:bg-slate-800 dark:border-white/10 p-4 hover:shadow-lg hover:border-emerald-200 dark:hover:border-emerald-800 transition-all"
                 >
                   <div className="h-24 w-24 shrink-0 rounded-xl bg-emerald-50 overflow-hidden grid place-items-center text-emerald-300">
                     {n.coverImage ? <img src={n.coverImage} alt={n.title} className="w-full h-full object-cover" /> : <Newspaper className="h-8 w-8" />}
                   </div>
                   <div className="min-w-0">
                     <span className="text-xs font-semibold text-amber-600 uppercase tracking-wide">{n.category}</span>
-                    <h4 className="font-display font-semibold text-slate-900 leading-snug mt-1 line-clamp-2 group-hover:text-emerald-800 transition-colors">{n.title}</h4>
+                    <h4 className="font-display font-semibold text-slate-900 dark:text-white leading-snug mt-1 line-clamp-2 group-hover:text-emerald-800 dark:group-hover:text-emerald-300 transition-colors">{n.title}</h4>
                     {n.location && <p className="mt-1 flex items-center gap-1 text-xs text-slate-400"><MapPin className="h-3 w-3" />{n.location}</p>}
                   </div>
                 </motion.article>

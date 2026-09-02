@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ArrowUpRight, GraduationCap } from "lucide-react";
+import { Menu, X, ArrowUpRight, GraduationCap, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/context/ThemeContext";
 
 const LINKS = [
   ["Home", "home"],
@@ -19,6 +20,7 @@ export default function Navbar({ settings }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("home");
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const onScroll = () => {
@@ -57,7 +59,7 @@ export default function Navbar({ settings }) {
             <GraduationCap className="h-5 w-5" />
           </span>
           <span className="text-left leading-tight">
-            <span className="block font-display font-extrabold text-slate-900 text-sm tracking-tight">KKN-PLP 66</span>
+            <span className="block font-display font-extrabold text-slate-900 dark:text-white text-sm tracking-tight">KKN-PLP 66</span>
             <span className="block text-[10px] uppercase tracking-widest text-emerald-700 font-semibold">UIN Gusdur</span>
           </span>
         </button>
@@ -69,7 +71,7 @@ export default function Navbar({ settings }) {
               onClick={() => go(id)}
               data-testid={`nav-link-${id}`}
               className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                active === id ? "text-emerald-800 bg-emerald-50" : "text-slate-600 hover:text-emerald-800 hover:bg-emerald-50/60"
+                active === id ? "text-emerald-800 bg-emerald-50 dark:text-emerald-300 dark:bg-emerald-500/10" : "text-slate-600 hover:text-emerald-800 hover:bg-emerald-50/60 dark:text-slate-300 dark:hover:text-emerald-300 dark:hover:bg-white/10"
               }`}
             >
               {label}
@@ -77,7 +79,17 @@ export default function Navbar({ settings }) {
           ))}
         </div>
 
-        <div className="hidden lg:block">
+        <div className="hidden lg:flex items-center gap-2">
+          <button
+            onClick={toggle}
+            data-testid="theme-toggle"
+            aria-label="Toggle dark mode"
+            className={`grid place-items-center h-10 w-10 rounded-full transition-colors ${
+              scrolled ? "text-slate-600 hover:bg-emerald-50 dark:text-slate-300 dark:hover:bg-white/10" : "text-white hover:bg-white/10"
+            }`}
+          >
+            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </button>
           <Button
             onClick={() => go("archives")}
             data-testid="nav-cta"
@@ -88,7 +100,7 @@ export default function Navbar({ settings }) {
         </div>
 
         <button
-          className="lg:hidden p-2 text-slate-800"
+          className={`lg:hidden p-2 ${scrolled ? "text-slate-800 dark:text-slate-100" : "text-white"}`}
           onClick={() => setOpen((v) => !v)}
           data-testid="nav-mobile-toggle"
           aria-label="Toggle menu"
@@ -112,6 +124,13 @@ export default function Navbar({ settings }) {
           <Button onClick={() => go("archives")} className="w-full mt-2 bg-amber-500 hover:bg-amber-600 text-white rounded-full font-semibold">
             View Documentation
           </Button>
+          <button
+            onClick={toggle}
+            data-testid="theme-toggle-mobile"
+            className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-slate-700 dark:text-slate-200 font-medium hover:bg-emerald-50 dark:hover:bg-white/10"
+          >
+            {theme === "dark" ? <><Sun className="h-4 w-4" /> Light mode</> : <><Moon className="h-4 w-4" /> Dark mode</>}
+          </button>
         </div>
       )}
     </header>

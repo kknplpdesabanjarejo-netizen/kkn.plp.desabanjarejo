@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Pencil, Trash2, Loader2, Upload, X, ImageIcon, Search, Inbox } from "lucide-react";
+import { Plus, Pencil, Trash2, Loader2, Upload, X, ImageIcon, Search, Inbox, GripVertical, ImagePlus } from "lucide-react";
 
 function slugify(t) {
   return (t || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -86,6 +86,9 @@ export default function ResourceManager({ config }) {
   const [saving, setSaving] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [query, setQuery] = useState("");
+  const [dragId, setDragId] = useState(null);
+  const [bulkUploading, setBulkUploading] = useState(false);
+  const bulkRef = useRef();
 
   const openNew = () => {
     const init = {};
@@ -141,6 +144,58 @@ export default function ResourceManager({ config }) {
   const filtered = query
     ? sorted.filter((it) => config.columns.some((c) => String(it[c] || "").toLowerCase().includes(query.toLowerCase())))
     : sorted;
+  const canDrag = config.reorderable && !query;
+
+  const onDrop = async (targetId) => {
+    if (!dragId || dragId === targetId) return setDragId(null);
+    const ids = sorted.map((i) => i.id);
+    const from = ids.indexOf(dragId);
+    const to = ids.indexOf(targetId);
+    const reordered = [...sorted];
+    const [moved] = reordered.splice(from, 1);
+    reordered.splice(to, 0, moved);
+    setDragId(null);
+    try {
+      await Promise.all(
+        reordered.map((it, idx) => (it.order !== idx + 1 ? api.put(`/${config.path}/${it.id}`, { order: idx + 1 }) : null)).filter(Boolean)
+      );
+      toast.success("Order updated");
+      refetch();
+    } catch {
+      toast.error("Reorder failed");
+    }
+  };
+
+  const bulkUpload = async (files) => {
+    if (!files?.length) return;
+    setBulkUploading(true);
+    let created = 0;
+    try {
+      let n = data.length;
+      for (const file of Array.from(files)) {
+        const fd = new FormData();
+        fd.append("file", file);
+        const up = await api.post("/upload", fd, { headers: { "Content-Type": "multipart/form-data" } });
+        n += 1;
+        const payload = {
+          [config.bulkImage]: up.data.data.url,
+          title: file.name.replace(/\.[^.]+$/, ""),
+          order: n,
+          isPublished: true,
+          isActive: true,
+        };
+        await api.post(`/${config.path}`, payload);
+        created += 1;
+      }
+      toast.success(`${created} ${created === 1 ? "item" : "items"} uploaded`);
+      refetch();
+    } catch (e) {
+      toast.error(formatApiError(e.response?.data?.detail) || "Some uploads failed");
+      refetch();
+    } finally {
+      setBulkUploading(false);
+    }
+  };
 
   return (
     <div data-testid={`resource-${config.path}`}>
@@ -157,6 +212,14 @@ export default function ResourceManager({ config }) {
           <Button onClick={openNew} className="bg-emerald-900 hover:bg-emerald-800 gap-1.5 shrink-0" data-testid={`${config.path}-add`}>
             <Plus className="h-4 w-4" /> Add
           </Button>
+          {config.bulkImage && (
+            <>
+              <input ref={bulkRef} type="file" accept="image/jpeg,image/png,image/webp" multiple className="hidden" data-testid={`${config.path}-bulk-input`} onChange={(e) => { bulkUpload(e.target.files); e.target.value = ""; }} />
+              <Button onClick={() => bulkRef.current?.click()} disabled={bulkUploading} variant="outline" className="gap-1.5 shrink-0 border-emerald-200 text-emerald-800 hover:bg-emerald-50" data-testid={`${config.path}-bulk-upload`}>
+                {bulkUploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ImagePlus className="h-4 w-4" />} Bulk Upload
+              </Button>
+            </>
+          )}
         </div>
       </div>
 
@@ -174,6 +237,7 @@ export default function ResourceManager({ config }) {
             <table className="w-full text-sm">
               <thead className="bg-slate-50 text-slate-500 text-left">
                 <tr>
+                  {canDrag && <th className="px-2 py-3 w-8"></th>}
                   {imageField && <th className="px-4 py-3 font-medium w-16"></th>}
                   {config.columns.map((c) => <th key={c} className="px-4 py-3 font-medium capitalize">{c}</th>)}
                   <th className="px-4 py-3 font-medium">Status</th>
@@ -185,7 +249,16 @@ export default function ResourceManager({ config }) {
                   const active = item.isActive !== false && item.isPublished !== false;
                   const hasStatus = "isActive" in item || "isPublished" in item;
                   return (
-                    <tr key={item.id} className="hover:bg-slate-50/60" data-testid={`row-${item.id}`}>
+                    <tr
+                      key={item.id}
+                      draggable={canDrag}
+                      onDragStart={() => setDragId(item.id)}
+                      onDragOver={(e) => canDrag && e.preventDefault()}
+                      onDrop={() => canDrag && onDrop(item.id)}
+                      className={`hover:bg-slate-50/60 ${canDrag ? "cursor-move" : ""} ${dragId === item.id ? "opacity-40" : ""}`}
+                      data-testid={`row-${item.id}`}
+                    >
+                      {canDrag && <td className="px-2 py-3 text-slate-300"><GripVertical className="h-4 w-4" /></td>}
                       {imageField && (
                         <td className="px-4 py-3">
                           <div className="h-10 w-10 rounded-lg bg-slate-100 overflow-hidden grid place-items-center text-slate-300">

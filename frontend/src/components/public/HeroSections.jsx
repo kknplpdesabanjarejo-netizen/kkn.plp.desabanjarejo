@@ -30,11 +30,11 @@ function Stat({ value, suffix, label, run }) {
   const v = useCountUp(value, run);
   return (
     <div className="text-center" data-testid={`stat-${label.toLowerCase().replace(/\s+/g, "-")}`}>
-      <div className="text-4xl sm:text-5xl font-display font-extrabold text-emerald-900">
+      <div className="text-4xl sm:text-5xl font-display font-extrabold text-emerald-900 dark:text-emerald-400">
         {v}
         <span className="text-amber-500">{suffix}</span>
       </div>
-      <div className="mt-1 text-xs sm:text-sm uppercase tracking-wider text-slate-500 font-medium">{label}</div>
+      <div className="mt-1 text-xs sm:text-sm uppercase tracking-wider text-slate-500 dark:text-slate-400 font-medium">{label}</div>
     </div>
   );
 }
@@ -111,7 +111,7 @@ export function Hero({ settings }) {
 
 export function About({ settings }) {
   return (
-    <section id="about" className="py-24 bg-white" data-testid="about-section">
+    <section id="about" className="py-24 bg-white dark:bg-slate-950" data-testid="about-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-14 items-center">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -130,20 +130,20 @@ export function About({ settings }) {
           <span className="text-xs uppercase tracking-widest font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 inline-block mb-4">
             About the Program
           </span>
-          <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white tracking-tight">
             A journey of presence, learning, and service
           </h2>
-          <p className="mt-5 text-slate-600 leading-relaxed">
+          <p className="mt-5 text-slate-600 dark:text-slate-300 leading-relaxed">
             KKN-PLP Integrated Group 66 unites community service (KKN) and educational field practice (PLP) into a single, meaningful experience. Our students live alongside the community, understand its needs, and design programs that create lasting, real impact.
           </p>
-          <p className="mt-4 text-slate-600 leading-relaxed">
+          <p className="mt-4 text-slate-600 dark:text-slate-300 leading-relaxed">
             This platform documents every step of our journey — from arrival and observation to implementation, collaboration, and a heartfelt closing.
           </p>
           <div className="mt-8 grid grid-cols-3 gap-4">
             {[["Be Present", "Show up fully"], ["Learn", "From the community"], ["Serve", "With purpose"]].map(([t, d]) => (
-              <div key={t} className="rounded-xl border border-emerald-100 bg-emerald-50/50 p-4">
-                <p className="font-display font-bold text-emerald-900">{t}</p>
-                <p className="text-xs text-slate-500 mt-1">{d}</p>
+              <div key={t} className="rounded-xl border border-emerald-100 bg-emerald-50/50 dark:border-emerald-900/40 dark:bg-emerald-900/20 p-4">
+                <p className="font-display font-bold text-emerald-900 dark:text-emerald-300">{t}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{d}</p>
               </div>
             ))}
           </div>
@@ -174,7 +174,7 @@ export function Statistics({ stats }) {
     [s.journeyStages ?? 7, "", "Journey Stages"],
   ];
   return (
-    <section ref={ref} className="py-16 bg-slate-50 border-y border-slate-100" data-testid="statistics-section">
+    <section ref={ref} className="py-16 bg-slate-50 dark:bg-slate-900 border-y border-slate-100 dark:border-white/10" data-testid="statistics-section">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-2 lg:grid-cols-4 gap-10">
         {data.map(([v, suf, label]) => (
           <Stat key={label} value={v} suffix={suf} label={label} run={run} />
@@ -195,11 +195,11 @@ const QUICK = [
 
 export function QuickAccess() {
   return (
-    <section className="py-24 bg-white" data-testid="quick-access-section">
+    <section className="py-24 bg-white dark:bg-slate-950" data-testid="quick-access-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center gap-3 mb-10">
-          <Compass className="h-6 w-6 text-emerald-800" />
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900">Quick Access</h2>
+          <Compass className="h-6 w-6 text-emerald-800 dark:text-emerald-400" />
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">Quick Access</h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           {QUICK.map(([label, Icon, id], i) => (
@@ -211,12 +211,12 @@ export function QuickAccess() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="group text-left rounded-2xl border border-slate-100 bg-gradient-to-br from-white to-slate-50 p-6 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-950/5 hover:border-emerald-200 transition-all duration-300"
+              className="group text-left rounded-2xl border border-slate-100 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-900 dark:border-white/10 p-6 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-950/5 hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300"
             >
               <span className="grid place-items-center h-12 w-12 rounded-xl bg-emerald-900 text-amber-400 mb-4 group-hover:scale-110 transition-transform">
                 <Icon className="h-6 w-6" />
               </span>
-              <p className="font-display font-semibold text-slate-900 group-hover:text-emerald-800 transition-colors">{label}</p>
+              <p className="font-display font-semibold text-slate-900 dark:text-white group-hover:text-emerald-800 dark:group-hover:text-emerald-300 transition-colors">{label}</p>
             </motion.button>
           ))}
         </div>

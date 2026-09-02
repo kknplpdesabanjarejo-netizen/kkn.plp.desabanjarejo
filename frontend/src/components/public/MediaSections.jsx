@@ -17,7 +17,7 @@ function toEmbed(url, type) {
 export function Archives({ items, loading }) {
   const sorted = [...(items || [])].sort((a, b) => (a.order || 0) - (b.order || 0));
   return (
-    <section id="archives" className="py-24 bg-white" data-testid="archives-section">
+    <section id="archives" className="py-24 bg-white dark:bg-slate-950" data-testid="archives-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeader label="Digital Archives" title="Documents & official records" description="Access schedules, reports, videos, and infographics from the program." testId="archives-header" />
         {loading ? (
@@ -30,12 +30,12 @@ export function Archives({ items, loading }) {
               const Ico = Icons[a.icon] || FileText;
               const link = a.url || a.embedUrl;
               return (
-                <div key={a.id} data-testid={`archive-card-${a.order}`} className="rounded-2xl border border-l-4 border-l-amber-500 border-slate-100 bg-gradient-to-br from-white to-amber-50/30 p-6 hover:shadow-lg transition-all">
+                <div key={a.id} data-testid={`archive-card-${a.order}`} className="rounded-2xl border border-l-4 border-l-amber-500 border-slate-100 bg-gradient-to-br from-white to-amber-50/30 dark:from-slate-900 dark:to-slate-900 dark:border-white/10 p-6 hover:shadow-lg transition-all">
                   <div className="flex items-start justify-between">
                     <span className="grid place-items-center h-11 w-11 rounded-xl bg-emerald-900 text-amber-400"><Ico className="h-5 w-5" /></span>
                     <span className="font-mono text-xs text-slate-400">{String(a.order).padStart(2, "0")}</span>
                   </div>
-                  <h3 className="mt-4 font-display font-semibold text-slate-900">{a.title}</h3>
+                  <h3 className="mt-4 font-display font-semibold text-slate-900 dark:text-white">{a.title}</h3>
                   {link ? (
                     <a href={link} target="_blank" rel="noreferrer" data-testid={`archive-link-${a.order}`} className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-800 hover:text-emerald-600">
                       Open document <ExternalLink className="h-4 w-4" />
@@ -57,7 +57,7 @@ export function Videos({ items, loading }) {
   const [active, setActive] = useState(null);
   const sorted = [...(items || [])].sort((a, b) => (a.order || 0) - (b.order || 0));
   return (
-    <section id="videos" className="py-24 bg-slate-50" data-testid="videos-section">
+    <section id="videos" className="py-24 bg-slate-50 dark:bg-slate-900" data-testid="videos-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeader label="Video Center" title="Watch our journey unfold" description="Highlights and documentation captured on video." testId="videos-header" />
         {loading ? (
@@ -67,14 +67,14 @@ export function Videos({ items, loading }) {
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {sorted.map((v) => (
-              <button key={v.id} onClick={() => setActive(v)} data-testid={`video-card-${v.order}`} className="group text-left rounded-2xl overflow-hidden bg-white border border-slate-100 hover:shadow-xl transition-all">
+              <button key={v.id} onClick={() => setActive(v)} data-testid={`video-card-${v.order}`} className="group text-left rounded-2xl overflow-hidden bg-white dark:bg-slate-800 border border-slate-100 dark:border-white/10 hover:shadow-xl transition-all">
                 <div className="aspect-video bg-emerald-950 relative overflow-hidden grid place-items-center">
                   {v.thumbnail && <img src={v.thumbnail} alt={v.title} className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity" />}
                   <PlayCircle className="h-14 w-14 text-white/90 relative group-hover:scale-110 transition-transform" />
                 </div>
                 <div className="p-4">
-                  <p className="font-display font-semibold text-slate-900">{v.title}</p>
-                  {v.category && <p className="text-xs text-emerald-700 mt-0.5">{v.category}</p>}
+                  <p className="font-display font-semibold text-slate-900 dark:text-white">{v.title}</p>
+                  {v.category && <p className="text-xs text-emerald-700 dark:text-emerald-400 mt-0.5">{v.category}</p>}
                 </div>
               </button>
             ))}
@@ -100,7 +100,7 @@ export function Videos({ items, loading }) {
 export function Memories({ items, loading }) {
   const sorted = [...(items || [])].sort((a, b) => (a.order || 0) - (b.order || 0));
   return (
-    <section id="memories" className="py-24 bg-white" data-testid="memories-section">
+    <section id="memories" className="py-24 bg-white dark:bg-slate-950" data-testid="memories-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeader label="Memories" title="Chapters we will always carry" description="The moments and connections that made this journey unforgettable." testId="memories-header" />
         {loading ? (

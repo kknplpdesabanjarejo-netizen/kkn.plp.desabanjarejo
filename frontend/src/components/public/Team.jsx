@@ -13,7 +13,7 @@ function MemberCard({ m, onOpen }) {
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
       data-testid={`team-member-${m.order}`}
-      className="group text-left rounded-2xl border border-slate-100 bg-white overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-950/5 transition-all duration-300 w-full"
+      className="group text-left rounded-2xl border border-slate-100 bg-white dark:bg-slate-900 dark:border-white/10 overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-950/5 transition-all duration-300 w-full"
     >
       <div className="aspect-square bg-emerald-50 overflow-hidden relative">
         {m.photo ? (
@@ -28,9 +28,9 @@ function MemberCard({ m, onOpen }) {
         </span>
       </div>
       <div className="p-4">
-        <p className="font-display font-bold text-slate-900 truncate">{m.name}</p>
-        <p className="text-xs text-slate-500 mt-0.5 truncate">{m.studyProgram}</p>
-        <p className="text-xs text-emerald-700 font-medium mt-0.5">{m.nim}</p>
+        <p className="font-display font-bold text-slate-900 dark:text-white truncate">{m.name}</p>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 truncate">{m.studyProgram}</p>
+        <p className="text-xs text-emerald-700 dark:text-emerald-400 font-medium mt-0.5">{m.nim}</p>
       </div>
     </motion.button>
   );
@@ -49,7 +49,7 @@ export default function Team({ members, loading }) {
   const sorted = [...(members || [])].sort((a, b) => (a.order || 0) - (b.order || 0));
 
   return (
-    <section id="team" className="py-24 bg-slate-50" data-testid="team-section">
+    <section id="team" className="py-24 bg-slate-50 dark:bg-slate-900" data-testid="team-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeader
           label="Our Team"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, Outlet, useNavigate, Link } from "react-router-dom";
 import * as Icons from "lucide-react";
 import { LayoutDashboard, Settings, ScrollText, LogOut, GraduationCap, Menu, X, ExternalLink } from "lucide-react";
@@ -9,6 +9,14 @@ export default function AdminLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove("dark");
+    return () => {
+      if (localStorage.getItem("kkn_theme") === "dark") root.classList.add("dark");
+    };
+  }, []);
 
   const doLogout = async () => {
     await logout();

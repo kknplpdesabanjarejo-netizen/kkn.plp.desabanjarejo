@@ -10,6 +10,7 @@ export const RESOURCES = [
     singular: "Team Member",
     icon: "Users",
     columns: ["name", "role", "studyProgram"],
+    reorderable: true,
     fields: [
       { name: "name", label: "Name", type: "text", required: true },
       { name: "nim", label: "Student ID (NIM)", type: "text" },
@@ -45,6 +46,8 @@ export const RESOURCES = [
     singular: "Gallery Item",
     icon: "Images",
     columns: ["title", "category"],
+    bulkImage: "imageUrl",
+    reorderable: true,
     fields: [
       { name: "title", label: "Title", type: "text", required: true },
       { name: "imageUrl", label: "Image", type: "image" },
@@ -133,6 +136,8 @@ export const RESOURCES = [
     singular: "Memory",
     icon: "Heart",
     columns: ["title", "category"],
+    bulkImage: "imageUrl",
+    reorderable: true,
     fields: [
       { name: "title", label: "Title", type: "text", required: true },
       { name: "category", label: "Category", type: "text" },

@@ -32,7 +32,7 @@ export default function PublicSite() {
   }, [settings]);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-slate-950">
       <Navbar settings={settings} />
       <main>
         <Hero settings={settings} />

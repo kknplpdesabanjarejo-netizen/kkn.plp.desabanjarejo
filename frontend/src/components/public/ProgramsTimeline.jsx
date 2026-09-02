@@ -10,7 +10,7 @@ function LucideIcon({ name, className }) {
 export function Programs({ programs, loading }) {
   const sorted = [...(programs || [])].sort((a, b) => (a.order || 0) - (b.order || 0));
   return (
-    <section id="programs" className="py-24 bg-white" data-testid="programs-section">
+    <section id="programs" className="py-24 bg-white dark:bg-slate-950" data-testid="programs-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeader label="Programs" title="Six areas of real contribution" description="Structured programs designed together with the community to create meaningful, lasting impact." testId="programs-header" />
         {loading ? (
@@ -29,16 +29,16 @@ export function Programs({ programs, loading }) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: (i % 3) * 0.08 }}
                 data-testid={`program-card-${p.number}`}
-                className="group relative rounded-2xl border border-slate-100 bg-gradient-to-br from-white to-slate-50 p-7 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-950/5 hover:border-emerald-200 transition-all duration-300"
+                className="group relative rounded-2xl border border-slate-100 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-900 dark:border-white/10 p-7 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-950/5 hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300"
               >
-                <span className="absolute top-6 right-7 font-display font-extrabold text-5xl text-emerald-50 group-hover:text-emerald-100 transition-colors">
+                <span className="absolute top-6 right-7 font-display font-extrabold text-5xl text-emerald-50 dark:text-slate-800 group-hover:text-emerald-100 transition-colors">
                   {String(p.number).padStart(2, "0")}
                 </span>
                 <span className="grid place-items-center h-12 w-12 rounded-xl bg-emerald-900 text-amber-400 mb-5 relative">
                   <LucideIcon name={p.icon} className="h-6 w-6" />
                 </span>
-                <h3 className="font-display font-bold text-lg text-slate-900 relative">{p.title}</h3>
-                <p className="mt-2 text-sm text-slate-600 leading-relaxed relative">{p.description}</p>
+                <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white relative">{p.title}</h3>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed relative">{p.description}</p>
                 {p.activities?.length > 0 && (
                   <ul className="mt-4 space-y-1.5 relative">
                     {p.activities.map((a, idx) => (

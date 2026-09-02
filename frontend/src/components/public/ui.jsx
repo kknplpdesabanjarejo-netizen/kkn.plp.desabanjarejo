@@ -16,20 +16,20 @@ export function SectionHeader({ label, title, description, testId }) {
           {label}
         </span>
       )}
-      <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-slate-900">{title}</h2>
-      {description && <p className="mt-4 text-base leading-relaxed text-slate-600">{description}</p>}
+      <h2 className="text-3xl sm:text-4xl font-display font-bold tracking-tight text-slate-900 dark:text-white">{title}</h2>
+      {description && <p className="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-300">{description}</p>}
     </motion.div>
   );
 }
 
 export function EmptyState({ title, message, testId }) {
   return (
-    <div className="flex flex-col items-center justify-center py-16 px-6 rounded-2xl border border-dashed border-emerald-200 bg-emerald-50/40 text-center" data-testid={testId}>
-      <span className="grid place-items-center h-14 w-14 rounded-2xl bg-white text-emerald-700 shadow-sm mb-4">
+    <div className="flex flex-col items-center justify-center py-16 px-6 rounded-2xl border border-dashed border-emerald-200 bg-emerald-50/40 dark:border-emerald-900/40 dark:bg-emerald-900/10 text-center" data-testid={testId}>
+      <span className="grid place-items-center h-14 w-14 rounded-2xl bg-white dark:bg-slate-800 text-emerald-700 dark:text-emerald-400 shadow-sm mb-4">
         <Inbox className="h-6 w-6" />
       </span>
-      <h4 className="font-display font-semibold text-slate-800 text-lg">{title}</h4>
-      <p className="mt-1.5 text-sm text-slate-500 max-w-sm">{message}</p>
+      <h4 className="font-display font-semibold text-slate-800 dark:text-slate-100 text-lg">{title}</h4>
+      <p className="mt-1.5 text-sm text-slate-500 dark:text-slate-400 max-w-sm">{message}</p>
     </div>
   );
 }
