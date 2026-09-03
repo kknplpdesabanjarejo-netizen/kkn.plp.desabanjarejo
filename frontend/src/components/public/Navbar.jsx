@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ArrowUpRight, GraduationCap, Sun, Moon } from "lucide-react";
+import { Menu, X, ArrowUpRight, GraduationCap, Sun, Moon, LockKeyhole } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -90,6 +90,18 @@ export default function Navbar({ settings }) {
           >
             {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </button>
+          <a
+            href="/admin/login"
+            data-testid="nav-admin-cta"
+            aria-label="Masuk Admin"
+            className={`hidden xl:flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm font-semibold border transition-colors ${
+              scrolled
+                ? "border-emerald-900/15 text-emerald-800 hover:bg-emerald-50 dark:border-white/15 dark:text-slate-200 dark:hover:bg-white/10"
+                : "border-white/25 text-white hover:bg-white/10"
+            }`}
+          >
+            <LockKeyhole className="h-4 w-4" /> Admin
+          </a>
           <Button
             onClick={() => go("archives")}
             data-testid="nav-cta"
@@ -131,6 +143,13 @@ export default function Navbar({ settings }) {
           >
             {theme === "dark" ? <><Sun className="h-4 w-4" /> Mode Terang</> : <><Moon className="h-4 w-4" /> Mode Gelap</>}
           </button>
+          <a
+            href="/admin/login"
+            data-testid="nav-admin-cta-mobile"
+            className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-emerald-200 dark:border-white/15 text-emerald-800 dark:text-slate-200 font-semibold hover:bg-emerald-50 dark:hover:bg-white/10"
+          >
+            <LockKeyhole className="h-4 w-4" /> Masuk Admin
+          </a>
         </div>
       )}
     </header>
