@@ -1,4 +1,4 @@
-import { GraduationCap, Instagram, Youtube, Mail, ArrowUp } from "lucide-react";
+import { GraduationCap, Instagram, Youtube, Mail, ArrowUp, LockKeyhole } from "lucide-react";
 
 export default function Footer({ settings }) {
   const s = settings || {};
@@ -54,13 +54,22 @@ export default function Footer({ settings }) {
           <p className="text-xs text-slate-500">
             © {s.year || "2026"} {s.siteName || "KKN-PLP Terpadu Kelompok 66"}. Seluruh hak cipta dilindungi.
           </p>
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-amber-400"
-            data-testid="footer-back-to-top"
-          >
-            Kembali ke atas <ArrowUp className="h-3.5 w-3.5" />
-          </button>
+          <div className="flex items-center gap-4">
+            <a
+              href="/admin/login"
+              data-testid="footer-admin-cta"
+              className="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 hover:bg-emerald-800 hover:border-emerald-700 px-4 py-2 text-xs font-semibold text-slate-200 transition-colors"
+            >
+              <LockKeyhole className="h-3.5 w-3.5" /> Masuk Admin
+            </a>
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-amber-400"
+              data-testid="footer-back-to-top"
+            >
+              Kembali ke atas <ArrowUp className="h-3.5 w-3.5" />
+            </button>
+          </div>
         </div>
       </div>
     </footer>
