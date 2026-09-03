@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useResource, useObject } from "@/lib/useApi";
 import Navbar from "@/components/public/Navbar";
 import Footer from "@/components/public/Footer";
+import FloatingWhatsApp from "@/components/public/FloatingWhatsApp";
 import { Hero, About, Statistics, QuickAccess } from "@/components/public/HeroSections";
 import Team from "@/components/public/Team";
 import { Programs, Timeline } from "@/components/public/ProgramsTimeline";
@@ -51,6 +52,7 @@ export default function PublicSite() {
         <Contact settings={settings} />
       </main>
       <Footer settings={settings} />
+      <FloatingWhatsApp settings={settings} />
     </div>
   );
 }
