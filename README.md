@@ -80,3 +80,4 @@ Helmet-equivalent secure headers, CORS whitelist, bcrypt password hashing, JWT a
 ## Manual Configuration Notes
 - Real team names, student IDs, study programs, village info, dates, and external links are intentionally left as placeholders / empty — add them via the admin dashboard. No identities are fabricated.
 - File storage currently uses Emergent managed object storage; swap to Cloudflare R2 as described above for a fully self-hosted production setup.
+<!--Trigger Cloudflare rebuild -->
