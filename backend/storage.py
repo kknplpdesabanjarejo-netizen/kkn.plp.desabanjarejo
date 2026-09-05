@@ -4,7 +4,7 @@ import io
 import cloudinary
 import cloudinary.uploader
 import requests
-
+APP_NAME = "kkn-plp-66"
 cloudinary.config(
     cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
     api_key=os.environ.get("CLOUDINARY_API_KEY"),
