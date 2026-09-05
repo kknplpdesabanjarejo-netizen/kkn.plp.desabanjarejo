@@ -33,11 +33,12 @@ def put_object(path: str, data: bytes, content_type: str) -> dict:
         overwrite=True,
     )
 
-    return {
-        "url": result["secure_url"],
-        "secure_url": result["secure_url"],
-        "public_id": result["public_id"],
-    }
+   return {
+    "path": result["secure_url"],
+    "url": result["secure_url"],
+    "secure_url": result["secure_url"],
+    "public_id": result["public_id"],
+}
 
 
 def get_object(path: str):
