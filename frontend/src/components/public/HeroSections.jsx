@@ -44,7 +44,7 @@ export function Hero({ settings }) {
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden" data-testid="hero-section">
       <div className="absolute inset-0">
-        <img src={HERO_IMG} alt="Students serving the community" className="w-full h-full object-cover" />
+        <img src={s.heroImage || HERO_IMG} alt="Background KKN-PLP" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-950/70 to-slate-950/50" />
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative w-full">
