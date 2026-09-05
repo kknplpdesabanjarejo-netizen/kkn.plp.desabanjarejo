@@ -4,7 +4,10 @@ import io
 import cloudinary
 import cloudinary.uploader
 import requests
+
+
 APP_NAME = "kkn-plp-66"
+
 cloudinary.config(
     cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
     api_key=os.environ.get("CLOUDINARY_API_KEY"),
@@ -27,18 +30,18 @@ def put_object(path: str, data: bytes, content_type: str) -> dict:
 
     result = cloudinary.uploader.upload(
         io.BytesIO(data),
-        folder=folder or "kkn-plp-66",
+        folder=folder or APP_NAME,
         public_id=public_id,
         resource_type="image",
         overwrite=True,
     )
 
-   return {
-    "path": result["secure_url"],
-    "url": result["secure_url"],
-    "secure_url": result["secure_url"],
-    "public_id": result["public_id"],
-}
+    return {
+        "path": result["secure_url"],
+        "url": result["secure_url"],
+        "secure_url": result["secure_url"],
+        "public_id": result["public_id"],
+    }
 
 
 def get_object(path: str):
