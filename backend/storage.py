@@ -1,11 +1,16 @@
 import os
+import io
 
+import cloudinary
+import cloudinary.uploader
 import requests
 
-STORAGE_BASE = (os.environ.get("INTEGRATION_PROXY_URL") or "").strip() or "https://integrations.emergentagent.com"
-STORAGE_URL = STORAGE_BASE.rstrip("/") + "/objstore/api/v1/storage"
-EMERGENT_KEY = os.environ.get("EMERGENT_LLM_KEY")
-APP_NAME = "kkn-plp-66"
+cloudinary.config(
+    cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.environ.get("CLOUDINARY_API_KEY"),
+    api_secret=os.environ.get("CLOUDINARY_API_SECRET"),
+    secure=True,
+)
 
 MIME_TYPES = {
     "jpg": "image/jpeg",
@@ -14,44 +19,38 @@ MIME_TYPES = {
     "webp": "image/webp",
 }
 
-_storage_key = None
-
-
-def init_storage(force: bool = False):
-    global _storage_key
-    if _storage_key and not force:
-        return _storage_key
-    resp = requests.post(f"{STORAGE_URL}/init", json={"emergent_key": EMERGENT_KEY}, timeout=30)
-    resp.raise_for_status()
-    _storage_key = resp.json()["storage_key"]
-    return _storage_key
-
 
 def put_object(path: str, data: bytes, content_type: str) -> dict:
-    key = init_storage()
-    resp = requests.put(
-        f"{STORAGE_URL}/objects/{path}",
-        headers={"X-Storage-Key": key, "Content-Type": content_type},
-        data=data,
-        timeout=120,
+    folder = os.path.dirname(path)
+    filename = os.path.basename(path)
+    public_id = os.path.splitext(filename)[0]
+
+    result = cloudinary.uploader.upload(
+        io.BytesIO(data),
+        folder=folder or "kkn-plp-66",
+        public_id=public_id,
+        resource_type="image",
+        overwrite=True,
     )
-    if resp.status_code == 404:
-        key = init_storage(force=True)
-        resp = requests.put(
-            f"{STORAGE_URL}/objects/{path}",
-            headers={"X-Storage-Key": key, "Content-Type": content_type},
-            data=data,
-            timeout=120,
-        )
-    resp.raise_for_status()
-    return resp.json()
+
+    return {
+        "url": result["secure_url"],
+        "secure_url": result["secure_url"],
+        "public_id": result["public_id"],
+    }
 
 
 def get_object(path: str):
-    key = init_storage()
-    resp = requests.get(f"{STORAGE_URL}/objects/{path}", headers={"X-Storage-Key": key}, timeout=60)
-    if resp.status_code == 404:
-        key = init_storage(force=True)
-        resp = requests.get(f"{STORAGE_URL}/objects/{path}", headers={"X-Storage-Key": key}, timeout=60)
+    url = path
+
+    if not path.startswith("http://") and not path.startswith("https://"):
+        cloud_name = os.environ.get("CLOUDINARY_CLOUD_NAME")
+        url = f"https://res.cloudinary.com/{cloud_name}/image/upload/{path}"
+
+    resp = requests.get(url, timeout=60)
     resp.raise_for_status()
-    return resp.content, resp.headers.get("Content-Type", "application/octet-stream")
+
+    return resp.content, resp.headers.get(
+        "Content-Type",
+        "application/octet-stream",
+    )
