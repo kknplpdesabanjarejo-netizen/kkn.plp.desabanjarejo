@@ -41,18 +41,25 @@ function Stat({ value, suffix, label, run }) {
 
 export function Hero({ settings }) {
   const s = settings || {};
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden" data-testid="hero-section">
-      <div className="absolute inset-0">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden"
+      data-testid="hero-section"
+    >
+      <div className="absolute inset-0 bg-emerald-950">
         {s.heroImage && (
-  <img
-    src={s.heroImage}
-    alt="Background KKN-PLP"
-    className="w-full h-full object-cover"
-  />
-)}
-        <div className="absolute inset-0 bg-emerald-950">
+          <img
+            src={s.heroImage}
+            alt="Background KKN-PLP"
+            className="w-full h-full object-cover"
+          />
+        )}
+
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-950/70 to-slate-950/50" />
       </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative w-full">
         <div className="max-w-2xl">
           <motion.span
@@ -61,8 +68,10 @@ export function Hero({ settings }) {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-amber-300 bg-white/10 border border-white/20 px-4 py-1.5 rounded-full backdrop-blur-sm"
           >
-            {s.university || "UIN K.H. Abdurrahman Wahid Pekalongan"} · {s.year || "2026"}
+            {s.university || "UIN K.H. Abdurrahman Wahid Pekalongan"} ·{" "}
+            {s.year || "2026"}
           </motion.span>
+
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -71,6 +80,7 @@ export function Hero({ settings }) {
           >
             {s.siteName || "KKN-PLP Integrated Group 66"}
           </motion.h1>
+
           <motion.p
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -79,14 +89,18 @@ export function Hero({ settings }) {
           >
             {s.tagline || "Be Present. Learn. Serve."}
           </motion.p>
+
           <motion.p
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-6 text-base sm:text-lg text-emerald-50/90 leading-relaxed max-w-xl"
           >
-            Dokumentasi perjalanan mahasiswa dalam belajar bersama masyarakat, membangun kolaborasi, dan memberikan kontribusi nyata melalui program KKN-PLP Terpadu.
+            Dokumentasi perjalanan mahasiswa dalam belajar bersama masyarakat,
+            membangun kolaborasi, dan memberikan kontribusi nyata melalui
+            program KKN-PLP Terpadu.
           </motion.p>
+
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -94,14 +108,24 @@ export function Hero({ settings }) {
             className="mt-9 flex flex-col sm:flex-row gap-3"
           >
             <Button
-              onClick={() => document.getElementById("timeline")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() =>
+                document
+                  .getElementById("timeline")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
               data-testid="hero-cta-primary"
               className="bg-amber-500 hover:bg-amber-600 text-white rounded-full h-12 px-7 text-base font-semibold gap-2 shadow-xl shadow-amber-900/20"
             >
-              Jelajahi Perjalanan Kami <ArrowRight className="h-5 w-5" />
+              Jelajahi Perjalanan Kami
+              <ArrowRight className="h-5 w-5" />
             </Button>
+
             <Button
-              onClick={() => document.getElementById("team")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() =>
+                document
+                  .getElementById("team")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
               data-testid="hero-cta-secondary"
               variant="outline"
               className="rounded-full h-12 px-7 text-base font-semibold bg-white/10 text-white border-white/30 hover:bg-white/20 hover:text-white backdrop-blur-sm"
