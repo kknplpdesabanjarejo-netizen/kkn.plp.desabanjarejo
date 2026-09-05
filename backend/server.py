@@ -159,8 +159,11 @@ async def upload_file(request: Request, file: UploadFile = File(...), user=Depen
         "created_at": now_iso(),
     })
     await log_activity(user, "UPLOAD", "files", stored_path, request)
-    base = (os.environ.get("PUBLIC_BASE_URL") or "").strip().rstrip("/") or str(request.base_url).rstrip("/")
-    return ok({"url": f"{base}/api/files/{stored_path}", "storageKey": stored_path})
+    
+    return ok({
+    "url": stored_path,
+    "storageKey": stored_path
+})
 
 
 @api_router.get("/files/{path:path}")
