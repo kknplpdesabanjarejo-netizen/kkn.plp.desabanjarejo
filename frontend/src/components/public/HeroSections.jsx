@@ -150,7 +150,11 @@ export function About({ settings }) {
           transition={{ duration: 0.6 }}
           className="relative"
         >
-          <img src={ABOUT_IMG} alt="Students collaborating with the community" className="rounded-3xl shadow-2xl shadow-emerald-950/10 w-full object-cover aspect-[4/3]" />
+          <img
+  src={settings?.aboutImage || ABOUT_IMG}
+  alt="Tentang KKN-PLP Terpadu"
+  className="rounded-3xl shadow-2xl shadow-emerald-950/10 w-full object-cover aspect-[4/3]"
+/>
           <div className="absolute -bottom-6 -right-4 sm:right-6 glass rounded-2xl border border-emerald-900/10 shadow-xl p-5 max-w-[220px]">
             <p className="font-display font-bold text-emerald-900 text-lg">Masyarakat yang Utama</p>
             <p className="text-sm text-slate-600 mt-1">Belajar dengan mengabdi, tumbuh bersama masyarakat desa.</p>
