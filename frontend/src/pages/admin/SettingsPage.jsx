@@ -273,7 +273,7 @@ export default function SettingsPage() {
 
         <Button
           type="submit"
-          disabled={saving || uploadingHero}
+          disabled={saving || uploadingHero || uploadingAbout}
           className="bg-emerald-900 hover:bg-emerald-800 gap-1.5"
           data-testid="settings-save"
         >
