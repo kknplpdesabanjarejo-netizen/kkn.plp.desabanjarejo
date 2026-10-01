@@ -81,6 +81,57 @@ export default function SettingsPage() {
     }
   };
 
+    const uploadAbout = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+    if (!allowedTypes.includes(file.type)) {
+      toast.error("Gunakan gambar JPG, PNG, atau WEBP.");
+      e.target.value = "";
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Ukuran gambar maksimal 5MB.");
+      e.target.value = "";
+      return;
+    }
+
+    setUploadingAbout(true);
+
+    try {
+      const data = new FormData();
+      data.append("file", file);
+
+      const response = await api.post("/upload", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      const imageUrl = response.data.data.url;
+
+      setForm((current) => ({
+        ...current,
+        aboutImage: imageUrl,
+      }));
+
+      toast.success(
+        "Gambar Tentang Program berhasil diunggah. Klik Simpan Perubahan untuk menerapkannya."
+      );
+    } catch (err) {
+      toast.error(
+        formatApiError(err.response?.data?.detail) ||
+          "Gagal mengunggah gambar Tentang Program."
+      );
+    } finally {
+      setUploadingAbout(false);
+      e.target.value = "";
+    }
+  };
+  
   const save = async (e) => {
     e.preventDefault();
     setSaving(true);
@@ -156,6 +207,43 @@ export default function SettingsPage() {
           </p>
         </div>
 
+                {/* GAMBAR TENTANG PROGRAM */}
+        <div>
+          <Label>Gambar Tentang Program</Label>
+
+          {form.aboutImage && (
+            <div className="mt-2 mb-3">
+              <img
+                src={form.aboutImage}
+                alt="Preview Tentang Program"
+                className="w-full h-48 object-cover rounded-xl border"
+              />
+            </div>
+          )}
+
+          <label className="mt-2 inline-flex items-center gap-2 cursor-pointer bg-slate-100 hover:bg-slate-200 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-700">
+            {uploadingAbout ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Upload className="h-4 w-4" />
+            )}
+
+            {uploadingAbout ? "Mengunggah..." : "Pilih Gambar"}
+
+            <input
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              onChange={uploadAbout}
+              disabled={uploadingAbout}
+              className="hidden"
+            />
+          </label>
+
+          <p className="text-xs text-slate-500 mt-2">
+            Format JPG, PNG, atau WEBP. Maksimal 5MB.
+          </p>
+        </div>
+        
         {FIELDS.map(([name, label, type]) => (
           <div key={name}>
             <Label htmlFor={name}>{label}</Label>
