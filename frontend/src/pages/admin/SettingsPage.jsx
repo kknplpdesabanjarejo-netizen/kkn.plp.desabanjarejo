@@ -24,6 +24,7 @@ export default function SettingsPage() {
   const [form, setForm] = useState(null);
   const [saving, setSaving] = useState(false);
   const [uploadingHero, setUploadingHero] = useState(false);
+  const [uploadingAbout, setUploadingAbout] = useState(false);
 
   useEffect(() => {
     api.get("/settings").then((r) => setForm(r.data.data));
