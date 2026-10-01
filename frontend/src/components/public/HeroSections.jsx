@@ -78,7 +78,7 @@ export function Hero({ settings }) {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-white leading-tight tracking-tight"
           >
-            {s.siteName || "KKN-PLP Integrated Group 66"}
+            {s.siteName || "KKN-PLP Terintegrasi Kelompok 66"}
           </motion.h1>
 
           <motion.p
