@@ -87,7 +87,7 @@ export function Hero({ settings }) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-4 text-2xl sm:text-3xl font-display font-bold text-amber-400"
           >
-            {s.tagline || "Be Present. Learn. Serve."}
+            {s.tagline || "Belajar. Berbakti. Mengabdi."}
           </motion.p>
 
           <motion.p
@@ -152,7 +152,7 @@ export function About({ settings }) {
         >
           <img
   src={settings?.aboutImage || ABOUT_IMG}
-  alt="Tentang KKN-PLP Terpadu"
+  alt="Tentang KKN-PLP Terintegrasi"
   className="rounded-3xl shadow-2xl shadow-emerald-950/10 w-full object-cover aspect-[4/3]"
 />
           <div className="absolute -bottom-6 -right-4 sm:right-6 glass rounded-2xl border border-emerald-900/10 shadow-xl p-5 max-w-[220px]">
@@ -165,10 +165,10 @@ export function About({ settings }) {
             Tentang Program
           </span>
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white tracking-tight">
-            Tentang KKN-PLP Terpadu
+            Tentang KKN-PLP Terintegrasi
           </h2>
           <p className="mt-5 text-slate-600 dark:text-slate-300 leading-relaxed">
-            KKN-PLP Terpadu merupakan wadah bagi mahasiswa untuk mengembangkan pengalaman akademik dan sosial melalui keterlibatan langsung bersama masyarakat. Melalui kegiatan pendidikan, keagamaan, sosial, digitalisasi, lingkungan, dan pemberdayaan masyarakat, mahasiswa berupaya menghadirkan kontribusi yang bermanfaat dan berkelanjutan.
+            KKN-PLP Terintegrasi merupakan wadah bagi mahasiswa untuk mengembangkan pengalaman akademik dan sosial melalui keterlibatan langsung bersama masyarakat. Melalui kegiatan pendidikan, keagamaan, sosial, digitalisasi, lingkungan, dan pemberdayaan masyarakat, mahasiswa berupaya menghadirkan kontribusi yang bermanfaat dan berkelanjutan.
           </p>
           <p className="mt-4 text-slate-600 dark:text-slate-300 leading-relaxed">
             Platform ini mendokumentasikan setiap langkah perjalanan kami — mulai dari kedatangan dan observasi hingga pelaksanaan, kolaborasi, dan penutupan yang penuh makna.
